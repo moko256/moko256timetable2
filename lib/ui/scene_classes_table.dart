@@ -13,7 +13,7 @@ import 'package:moko256timetable2/features/classes_edit/classes_edit_state.dart'
 import 'package:moko256timetable2/features/classes_import/classes_import_behavior.dart';
 import 'package:moko256timetable2/features/classes_show/classes_show_behavior.dart';
 import 'package:moko256timetable2/features/classes_show/classes_show_state.dart';
-import 'package:moko256timetable2/ui/class_edit/scene_classes_edit.dart';
+import 'package:moko256timetable2/ui/scene_classes_edit.dart';
 
 class SceneClassesTable extends ConsumerWidget {
   const SceneClassesTable({Key? key}) : super(key: key);

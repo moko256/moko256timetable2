@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:moko256timetable2/ui/classes_table/scene_classes_table.dart';
+import 'package:moko256timetable2/ui/scene_classes_table.dart';
 
 void main() {
-  runApp(const ProviderScope(child: MainApp()));
+  runApp(const MainApp());
 }
 
 class MainApp extends StatelessWidget {
@@ -26,11 +26,13 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "timetable",
-      theme: createTheme(Brightness.light, Colors.black),
-      darkTheme: createTheme(Brightness.dark, Colors.white),
-      home: const SceneClassesTable(),
+    return ProviderScope(
+      child: MaterialApp(
+        title: "timetable",
+        theme: createTheme(Brightness.light, Colors.black),
+        darkTheme: createTheme(Brightness.dark, Colors.white),
+        home: const SceneClassesTable(),
+      ),
     );
   }
 }
