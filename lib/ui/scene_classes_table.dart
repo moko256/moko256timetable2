@@ -14,6 +14,7 @@ import 'package:moko256timetable2/features/classes_import/classes_import_behavio
 import 'package:moko256timetable2/features/classes_show/classes_show_behavior.dart';
 import 'package:moko256timetable2/features/classes_show/classes_show_state.dart';
 import 'package:moko256timetable2/ui/scene_classes_edit.dart';
+import 'package:moko256timetable2/ui/scene_timetables_list.dart';
 
 class SceneClassesTable extends ConsumerWidget {
   const SceneClassesTable({Key? key}) : super(key: key);
@@ -27,7 +28,18 @@ class SceneClassesTable extends ConsumerWidget {
     print("aaaaaaa");
     return Scaffold(
       appBar: AppBar(
-        title: const Text("timetable"),
+        title: const Text("Class 1-A"),
+        leading: IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const SceneTimetablesList(),
+                  fullscreenDialog: true,
+                ),
+              );
+            },
+            icon: const Icon(Icons.menu)),
         actions: [
           PopupMenuButton<String>(
             onSelected: (item) {
