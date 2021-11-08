@@ -23,6 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  rxdart: ^0.27.2
   flutter_hooks: ^0.18.0
   hooks_riverpod: ^1.0.0-dev.7
   freezed_annotation:
@@ -32,7 +33,7 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
+  # cupertino_icons: ^1.0.2
 
 dev_dependencies:
   flutter_lints:
@@ -89,4 +90,4 @@ targets:
       freezed:
         generate_for:
           include:
-            - lib/features/**.dart
+            - lib/*.dart

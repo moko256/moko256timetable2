@@ -1,0 +1,164 @@
+import 'dart:math';
+
+import 'package:color_models/color_models.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:moko256timetable2/model_main.dart';
+import 'package:moko256timetable2/model_view_main.dart';
+import 'package:moko256timetable2/routes_main.dart';
+
+class SceneClassesTable extends HookConsumerWidget {
+  const SceneClassesTable({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    ModelMain model = ref.watch(ModelViewMain.modelMain);
+    var classesSnapshot = useStream(model.currentClasses);
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(classesSnapshot.data?.info.name ?? "timetables"),
+        leading: IconButton(
+          icon: const Icon(Icons.menu),
+          onPressed: () {
+            RoutesMain.push(context, RoutesMain.routeTables);
+          },
+        ),
+      ),
+      body: Column(children: <Widget>[
+        Divider(
+          height: 1,
+          color: Theme.of(context).dividerColor,
+        ),
+        const Expanded(child: ComponentClassesTableOrSpinner()),
+      ]),
+    );
+  }
+}
+
+@immutable
+class ComponentClassesTableOrSpinner extends HookConsumerWidget {
+  const ComponentClassesTableOrSpinner({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    ModelMain model = ref.watch(ModelViewMain.modelMain);
+    AsyncSnapshot<EntityMainClasses?> classesSnapshot =
+        useStream(model.currentClasses);
+
+    ModelMainEditClass modelEdit = ref.watch(ModelViewMain.modelMainEditClass);
+
+    var classes = classesSnapshot.data;
+    if (classes != null) {
+      return Container(
+        margin: const EdgeInsets.all(2.0),
+        child: Row(
+          children: classes.info.weekDays
+              .map<Widget>(
+                (weekDay) => Expanded(
+                  child: Column(
+                    children: classes.info.periods.map<Widget>(
+                      (period) {
+                        var where = EntityMainClassWhere(weekDay, period);
+                        var info = classes.classes.map[where];
+                        Widget clazzWidget = ComponentDetails(
+                          where,
+                          info,
+                          classes.colors[info] ?? 0.0,
+                        );
+                        return Expanded(
+                          child: SizedBox(
+                            width: double.infinity,
+                            child: GestureDetector(
+                              child: clazzWidget,
+                              onTap: () {
+                                modelEdit.startEditing(where);
+                                RoutesMain.push(context, RoutesMain.routeEdit);
+                              },
+                            ),
+                          ),
+                        );
+                      },
+                    ).toList(),
+                  ),
+                ),
+              )
+              .toList(),
+        ),
+      );
+    } else {
+      return const Center(child: CircularProgressIndicator());
+    }
+  }
+}
+
+@immutable
+class ComponentDetails extends StatelessWidget {
+  final EntityMainClassWhere where;
+  final EntityMainClassInfo? info;
+  final double colorPosition;
+
+  const ComponentDetails(this.where, this.info, this.colorPosition);
+
+  Color lchToRgb(double l, double c, double h) {
+    var color = LabColor(l, c * cos(h), c * sin(h)).toRgbColor();
+    return Color.fromARGB(color.alpha, color.red, color.green, color.blue);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    var info = this.info;
+    if (info != null) {
+      double l;
+      double c;
+      var h = pi * colorPosition;
+      if (Theme.of(context).brightness == Brightness.light) {
+        l = 93.0;
+        c = 46.0;
+      } else {
+        l = 70.0;
+        c = 38.0;
+      }
+
+      var textStyle =
+          Theme.of(context).textTheme.caption?.copyWith(color: Colors.black);
+
+      return Card(
+        color: lchToRgb(l, c, h),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),
+        margin: const EdgeInsets.all(2.0),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(info.name,
+                  style: textStyle,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis),
+              const SizedBox(height: 4),
+              Text(info.room,
+                  style: textStyle,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis),
+            ],
+          ),
+        ),
+      );
+    } else {
+      Color background;
+      if (Theme.of(context).brightness == Brightness.light) {
+        background = lchToRgb(90, 0, 0);
+      } else {
+        background = lchToRgb(30, 0, 0);
+      }
+      return Card(
+        elevation: 0,
+        color: background,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),
+        margin: const EdgeInsets.all(2.0),
+      );
+    }
+  }
+}

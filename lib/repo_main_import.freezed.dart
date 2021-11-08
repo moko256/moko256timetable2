@@ -2,7 +2,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'classes_import_behavior.dart';
+part of 'repo_main_import.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -207,10 +207,12 @@ _ImportingClassesInfo _$_ImportingClassesInfoFromJson(
 class _$_ImportingClassesInfoTearOff {
   const _$_ImportingClassesInfoTearOff();
 
-  __ImportingClassesInfo call(List<String> weekDays, int periodMax) {
+  __ImportingClassesInfo call(
+      String name, int periodMax, List<String> weekDays) {
     return __ImportingClassesInfo(
-      weekDays,
+      name,
       periodMax,
+      weekDays,
     );
   }
 
@@ -224,8 +226,9 @@ const _$ImportingClassesInfo = _$_ImportingClassesInfoTearOff();
 
 /// @nodoc
 mixin _$_ImportingClassesInfo {
-  List<String> get weekDays => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
   int get periodMax => throw _privateConstructorUsedError;
+  List<String> get weekDays => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -238,7 +241,7 @@ abstract class _$ImportingClassesInfoCopyWith<$Res> {
   factory _$ImportingClassesInfoCopyWith(_ImportingClassesInfo value,
           $Res Function(_ImportingClassesInfo) then) =
       __$ImportingClassesInfoCopyWithImpl<$Res>;
-  $Res call({List<String> weekDays, int periodMax});
+  $Res call({String name, int periodMax, List<String> weekDays});
 }
 
 /// @nodoc
@@ -252,18 +255,23 @@ class __$ImportingClassesInfoCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? weekDays = freezed,
+    Object? name = freezed,
     Object? periodMax = freezed,
+    Object? weekDays = freezed,
   }) {
     return _then(_value.copyWith(
-      weekDays: weekDays == freezed
-          ? _value.weekDays
-          : weekDays // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
       periodMax: periodMax == freezed
           ? _value.periodMax
           : periodMax // ignore: cast_nullable_to_non_nullable
               as int,
+      weekDays: weekDays == freezed
+          ? _value.weekDays
+          : weekDays // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -275,7 +283,7 @@ abstract class _$_ImportingClassesInfoCopyWith<$Res>
           $Res Function(__ImportingClassesInfo) then) =
       __$_ImportingClassesInfoCopyWithImpl<$Res>;
   @override
-  $Res call({List<String> weekDays, int periodMax});
+  $Res call({String name, int periodMax, List<String> weekDays});
 }
 
 /// @nodoc
@@ -291,18 +299,23 @@ class __$_ImportingClassesInfoCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? weekDays = freezed,
+    Object? name = freezed,
     Object? periodMax = freezed,
+    Object? weekDays = freezed,
   }) {
     return _then(__ImportingClassesInfo(
-      weekDays == freezed
-          ? _value.weekDays
-          : weekDays // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+      name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
       periodMax == freezed
           ? _value.periodMax
           : periodMax // ignore: cast_nullable_to_non_nullable
               as int,
+      weekDays == freezed
+          ? _value.weekDays
+          : weekDays // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -310,38 +323,43 @@ class __$_ImportingClassesInfoCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$__ImportingClassesInfo implements __ImportingClassesInfo {
-  _$__ImportingClassesInfo(this.weekDays, this.periodMax);
+  _$__ImportingClassesInfo(this.name, this.periodMax, this.weekDays);
 
   factory _$__ImportingClassesInfo.fromJson(Map<String, dynamic> json) =>
       _$$__ImportingClassesInfoFromJson(json);
 
   @override
-  final List<String> weekDays;
+  final String name;
   @override
   final int periodMax;
+  @override
+  final List<String> weekDays;
 
   @override
   String toString() {
-    return '_ImportingClassesInfo(weekDays: $weekDays, periodMax: $periodMax)';
+    return '_ImportingClassesInfo(name: $name, periodMax: $periodMax, weekDays: $weekDays)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is __ImportingClassesInfo &&
-            (identical(other.weekDays, weekDays) ||
-                const DeepCollectionEquality()
-                    .equals(other.weekDays, weekDays)) &&
+            (identical(other.name, name) ||
+                const DeepCollectionEquality().equals(other.name, name)) &&
             (identical(other.periodMax, periodMax) ||
                 const DeepCollectionEquality()
-                    .equals(other.periodMax, periodMax)));
+                    .equals(other.periodMax, periodMax)) &&
+            (identical(other.weekDays, weekDays) ||
+                const DeepCollectionEquality()
+                    .equals(other.weekDays, weekDays)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(weekDays) ^
-      const DeepCollectionEquality().hash(periodMax);
+      const DeepCollectionEquality().hash(name) ^
+      const DeepCollectionEquality().hash(periodMax) ^
+      const DeepCollectionEquality().hash(weekDays);
 
   @JsonKey(ignore: true)
   @override
@@ -356,16 +374,19 @@ class _$__ImportingClassesInfo implements __ImportingClassesInfo {
 }
 
 abstract class __ImportingClassesInfo implements _ImportingClassesInfo {
-  factory __ImportingClassesInfo(List<String> weekDays, int periodMax) =
+  factory __ImportingClassesInfo(
+          String name, int periodMax, List<String> weekDays) =
       _$__ImportingClassesInfo;
 
   factory __ImportingClassesInfo.fromJson(Map<String, dynamic> json) =
       _$__ImportingClassesInfo.fromJson;
 
   @override
-  List<String> get weekDays => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
   @override
   int get periodMax => throw _privateConstructorUsedError;
+  @override
+  List<String> get weekDays => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$_ImportingClassesInfoCopyWith<__ImportingClassesInfo> get copyWith =>
@@ -380,11 +401,11 @@ _ImportingClass _$_ImportingClassFromJson(Map<String, dynamic> json) {
 class _$_ImportingClassTearOff {
   const _$_ImportingClassTearOff();
 
-  __ImportingClass call(String weekDay, int period, String title, String room) {
+  __ImportingClass call(String weekDay, int period, String name, String room) {
     return __ImportingClass(
       weekDay,
       period,
-      title,
+      name,
       room,
     );
   }
@@ -401,7 +422,7 @@ const _$ImportingClass = _$_ImportingClassTearOff();
 mixin _$_ImportingClass {
   String get weekDay => throw _privateConstructorUsedError;
   int get period => throw _privateConstructorUsedError;
-  String get title => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
   String get room => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -415,7 +436,7 @@ abstract class _$ImportingClassCopyWith<$Res> {
   factory _$ImportingClassCopyWith(
           _ImportingClass value, $Res Function(_ImportingClass) then) =
       __$ImportingClassCopyWithImpl<$Res>;
-  $Res call({String weekDay, int period, String title, String room});
+  $Res call({String weekDay, int period, String name, String room});
 }
 
 /// @nodoc
@@ -431,7 +452,7 @@ class __$ImportingClassCopyWithImpl<$Res>
   $Res call({
     Object? weekDay = freezed,
     Object? period = freezed,
-    Object? title = freezed,
+    Object? name = freezed,
     Object? room = freezed,
   }) {
     return _then(_value.copyWith(
@@ -443,9 +464,9 @@ class __$ImportingClassCopyWithImpl<$Res>
           ? _value.period
           : period // ignore: cast_nullable_to_non_nullable
               as int,
-      title: title == freezed
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String,
       room: room == freezed
           ? _value.room
@@ -462,7 +483,7 @@ abstract class _$_ImportingClassCopyWith<$Res>
           __ImportingClass value, $Res Function(__ImportingClass) then) =
       __$_ImportingClassCopyWithImpl<$Res>;
   @override
-  $Res call({String weekDay, int period, String title, String room});
+  $Res call({String weekDay, int period, String name, String room});
 }
 
 /// @nodoc
@@ -480,7 +501,7 @@ class __$_ImportingClassCopyWithImpl<$Res>
   $Res call({
     Object? weekDay = freezed,
     Object? period = freezed,
-    Object? title = freezed,
+    Object? name = freezed,
     Object? room = freezed,
   }) {
     return _then(__ImportingClass(
@@ -492,9 +513,9 @@ class __$_ImportingClassCopyWithImpl<$Res>
           ? _value.period
           : period // ignore: cast_nullable_to_non_nullable
               as int,
-      title == freezed
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
+      name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String,
       room == freezed
           ? _value.room
@@ -507,7 +528,7 @@ class __$_ImportingClassCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$__ImportingClass implements __ImportingClass {
-  _$__ImportingClass(this.weekDay, this.period, this.title, this.room);
+  _$__ImportingClass(this.weekDay, this.period, this.name, this.room);
 
   factory _$__ImportingClass.fromJson(Map<String, dynamic> json) =>
       _$$__ImportingClassFromJson(json);
@@ -517,13 +538,13 @@ class _$__ImportingClass implements __ImportingClass {
   @override
   final int period;
   @override
-  final String title;
+  final String name;
   @override
   final String room;
 
   @override
   String toString() {
-    return '_ImportingClass(weekDay: $weekDay, period: $period, title: $title, room: $room)';
+    return '_ImportingClass(weekDay: $weekDay, period: $period, name: $name, room: $room)';
   }
 
   @override
@@ -535,8 +556,8 @@ class _$__ImportingClass implements __ImportingClass {
                     .equals(other.weekDay, weekDay)) &&
             (identical(other.period, period) ||
                 const DeepCollectionEquality().equals(other.period, period)) &&
-            (identical(other.title, title) ||
-                const DeepCollectionEquality().equals(other.title, title)) &&
+            (identical(other.name, name) ||
+                const DeepCollectionEquality().equals(other.name, name)) &&
             (identical(other.room, room) ||
                 const DeepCollectionEquality().equals(other.room, room)));
   }
@@ -546,7 +567,7 @@ class _$__ImportingClass implements __ImportingClass {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(weekDay) ^
       const DeepCollectionEquality().hash(period) ^
-      const DeepCollectionEquality().hash(title) ^
+      const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(room);
 
   @JsonKey(ignore: true)
@@ -562,7 +583,7 @@ class _$__ImportingClass implements __ImportingClass {
 
 abstract class __ImportingClass implements _ImportingClass {
   factory __ImportingClass(
-          String weekDay, int period, String title, String room) =
+          String weekDay, int period, String name, String room) =
       _$__ImportingClass;
 
   factory __ImportingClass.fromJson(Map<String, dynamic> json) =
@@ -573,7 +594,7 @@ abstract class __ImportingClass implements _ImportingClass {
   @override
   int get period => throw _privateConstructorUsedError;
   @override
-  String get title => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
   @override
   String get room => throw _privateConstructorUsedError;
   @override
