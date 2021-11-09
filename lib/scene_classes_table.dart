@@ -59,52 +59,67 @@ class ComponentClassesTableOrSpinner extends HookConsumerWidget {
 
       var weekDayNames = DateFormat.EEEE().dateSymbols.WEEKDAYS;
 
-      return LayoutGrid(
-        columnSizes: [
-          const IntrinsicContentTrackSize(),
-          for (var _ in weekDays) const FlexibleTrackSize(1),
-        ],
-        rowSizes: [
-          const IntrinsicContentTrackSize(),
-          for (var _ in periods) const FlexibleTrackSize(1),
-        ],
-        children: [
-          for (var wIdx = 0; wIdx < weekDays.length; wIdx++)
-            GridPlacement(
-              columnStart: wIdx + 1,
-              rowStart: 0,
-              child: Text(weekDayNames[weekDays[wIdx].index]),
-            ),
-          for (var pIdx = 0; pIdx < periods.length; pIdx++)
-            GridPlacement(
-              columnStart: 0,
-              rowStart: pIdx + 1,
-              child: Text((pIdx + 1).toString()),
-            ),
-          for (var pIdx = 0; pIdx < periods.length; pIdx++)
+      return Container(
+        padding: const EdgeInsets.all(2),
+        child: LayoutGrid(
+          columnSizes: [
+            const IntrinsicContentTrackSize(),
+            for (var _ in weekDays) const FlexibleTrackSize(1),
+          ],
+          rowSizes: [
+            const IntrinsicContentTrackSize(),
+            for (var _ in periods) const FlexibleTrackSize(1),
+          ],
+          children: [
             for (var wIdx = 0; wIdx < weekDays.length; wIdx++)
-              () {
-                var where = EntityMainClassWhere(weekDays[wIdx], periods[pIdx]);
-                var info = classes.classes.map[where];
-                return GridPlacement(
-                  columnStart: wIdx + 1,
-                  rowStart: pIdx + 1,
-                  child: SizedBox.expand(
-                    child: GestureDetector(
-                      child: ComponentDetails(
-                        where,
-                        info,
-                        classes.colors[info] ?? 0.0,
-                      ),
-                      onTap: () {
-                        modelEdit.startEditing(where);
-                        RoutesMain.push(context, RoutesMain.routeEdit);
-                      },
+              GridPlacement(
+                columnStart: wIdx + 1,
+                rowStart: 0,
+                child: Container(
+                  padding: const EdgeInsets.all(4),
+                  child: Text(weekDayNames[weekDays[wIdx].index]),
+                ),
+              ),
+            for (var pIdx = 0; pIdx < periods.length; pIdx++)
+              GridPlacement(
+                columnStart: 0,
+                rowStart: pIdx + 1,
+                child: Center(
+                  child: Container(
+                    padding: const EdgeInsets.all(4),
+                    child: Text(
+                      (pIdx + 1).toString(),
+                      textAlign: TextAlign.center,
                     ),
                   ),
-                );
-              }(),
-        ],
+                ),
+              ),
+            for (var pIdx = 0; pIdx < periods.length; pIdx++)
+              for (var wIdx = 0; wIdx < weekDays.length; wIdx++)
+                () {
+                  var where =
+                      EntityMainClassWhere(weekDays[wIdx], periods[pIdx]);
+                  var info = classes.classes.map[where];
+                  return GridPlacement(
+                    columnStart: wIdx + 1,
+                    rowStart: pIdx + 1,
+                    child: SizedBox.expand(
+                      child: GestureDetector(
+                        child: ComponentDetails(
+                          where,
+                          info,
+                          classes.colors[info] ?? 0.0,
+                        ),
+                        onTap: () {
+                          modelEdit.startEditing(where);
+                          RoutesMain.push(context, RoutesMain.routeEdit);
+                        },
+                      ),
+                    ),
+                  );
+                }(),
+          ],
+        ),
       );
     } else {
       return const Center(child: CircularProgressIndicator());
