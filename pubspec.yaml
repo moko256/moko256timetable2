@@ -30,6 +30,8 @@ dependencies:
   json_serializable:
   color_models:
   file_picker:
+  flutter_layout_grid: ^1.0.0
+  intl: ^0.17.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

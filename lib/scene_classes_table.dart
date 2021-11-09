@@ -4,7 +4,9 @@ import 'package:color_models/color_models.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:moko256timetable2/model_main.dart';
 import 'package:moko256timetable2/model_view_main.dart';
 import 'package:moko256timetable2/routes_main.dart';
@@ -52,41 +54,57 @@ class ComponentClassesTableOrSpinner extends HookConsumerWidget {
 
     var classes = classesSnapshot.data;
     if (classes != null) {
-      return Container(
-        margin: const EdgeInsets.all(2.0),
-        child: Row(
-          children: classes.info.weekDays
-              .map<Widget>(
-                (weekDay) => Expanded(
-                  child: Column(
-                    children: classes.info.periods.map<Widget>(
-                      (period) {
-                        var where = EntityMainClassWhere(weekDay, period);
-                        var info = classes.classes.map[where];
-                        Widget clazzWidget = ComponentDetails(
-                          where,
-                          info,
-                          classes.colors[info] ?? 0.0,
-                        );
-                        return Expanded(
-                          child: SizedBox(
-                            width: double.infinity,
-                            child: GestureDetector(
-                              child: clazzWidget,
-                              onTap: () {
-                                modelEdit.startEditing(where);
-                                RoutesMain.push(context, RoutesMain.routeEdit);
-                              },
-                            ),
-                          ),
-                        );
+      var periods = classes.info.periods.toList();
+      var weekDays = classes.info.weekDays.toList();
+
+      var weekDayNames = DateFormat.EEEE().dateSymbols.WEEKDAYS;
+
+      return LayoutGrid(
+        columnSizes: [
+          const IntrinsicContentTrackSize(),
+          for (var _ in weekDays) const FlexibleTrackSize(1),
+        ],
+        rowSizes: [
+          const IntrinsicContentTrackSize(),
+          for (var _ in periods) const FlexibleTrackSize(1),
+        ],
+        children: [
+          for (var wIdx = 0; wIdx < weekDays.length; wIdx++)
+            GridPlacement(
+              columnStart: wIdx + 1,
+              rowStart: 0,
+              child: Text(weekDayNames[weekDays[wIdx].index]),
+            ),
+          for (var pIdx = 0; pIdx < periods.length; pIdx++)
+            GridPlacement(
+              columnStart: 0,
+              rowStart: pIdx + 1,
+              child: Text((pIdx + 1).toString()),
+            ),
+          for (var pIdx = 0; pIdx < periods.length; pIdx++)
+            for (var wIdx = 0; wIdx < weekDays.length; wIdx++)
+              () {
+                var where = EntityMainClassWhere(weekDays[wIdx], periods[pIdx]);
+                var info = classes.classes.map[where];
+                return GridPlacement(
+                  columnStart: wIdx + 1,
+                  rowStart: pIdx + 1,
+                  child: SizedBox.expand(
+                    child: GestureDetector(
+                      child: ComponentDetails(
+                        where,
+                        info,
+                        classes.colors[info] ?? 0.0,
+                      ),
+                      onTap: () {
+                        modelEdit.startEditing(where);
+                        RoutesMain.push(context, RoutesMain.routeEdit);
                       },
-                    ).toList(),
+                    ),
                   ),
-                ),
-              )
-              .toList(),
-        ),
+                );
+              }(),
+        ],
       );
     } else {
       return const Center(child: CircularProgressIndicator());

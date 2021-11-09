@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:moko256timetable2/model_main.dart';
 import 'package:moko256timetable2/model_view_main.dart';
 
@@ -20,6 +21,8 @@ class SceneTermEdit extends HookConsumerWidget {
     }, ["SceneTimetablesEdit.dialogCloseHandler"]);
 
     if (editing == null) return Container();
+
+    var weekDayNames = DateFormat.EEEE().dateSymbols.SHORTWEEKDAYS;
 
     return AlertDialog(
       title: const Text("Edit timetable details"),
@@ -60,8 +63,7 @@ class SceneTermEdit extends HookConsumerWidget {
               children: [
                 for (WeekDay weekDay in WeekDay.values)
                   FilterChip(
-                    label:
-                        Text(weekDay.toString().replaceFirst("WeekDay.", "")),
+                    label: Text(weekDayNames[weekDay.index]),
                     selected: editing.weekDays.contains(weekDay),
                     onSelected: (bool selected) {
                       if (selected) {
