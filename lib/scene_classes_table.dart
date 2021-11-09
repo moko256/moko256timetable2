@@ -6,7 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:intl/intl.dart';
+import 'package:moko256timetable2/app_locale.dart';
 import 'package:moko256timetable2/model_main.dart';
 import 'package:moko256timetable2/model_view_main.dart';
 import 'package:moko256timetable2/routes_main.dart';
@@ -21,7 +21,8 @@ class SceneClassesTable extends HookConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(classesSnapshot.data?.info.name ?? "timetables"),
+        title: Text(
+            classesSnapshot.data?.info.name ?? AppLocale.of(context).app_name),
         leading: IconButton(
           icon: const Icon(Icons.menu),
           onPressed: () {
@@ -57,7 +58,8 @@ class ComponentClassesTableOrSpinner extends HookConsumerWidget {
       var periods = classes.info.periods.toList();
       var weekDays = classes.info.weekDays.toList();
 
-      var weekDayNames = DateFormat.EEEE().dateSymbols.WEEKDAYS;
+      var weekDayNames =
+          AppLocale.getCurrentDateFormat(context).dateSymbols.WEEKDAYS;
 
       return Container(
         padding: const EdgeInsets.all(2),
@@ -88,7 +90,7 @@ class ComponentClassesTableOrSpinner extends HookConsumerWidget {
                   child: Container(
                     padding: const EdgeInsets.all(4),
                     child: Text(
-                      (pIdx + 1).toString(),
+                      AppLocale.of(context).period_n(pIdx + 1),
                       textAlign: TextAlign.center,
                     ),
                   ),

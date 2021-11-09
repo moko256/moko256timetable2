@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:moko256timetable2/app_locale.dart';
 import 'package:moko256timetable2/model_main.dart';
 import 'package:moko256timetable2/model_view_main.dart';
 import 'package:moko256timetable2/routes_main.dart';
@@ -21,7 +22,7 @@ class SceneTermsList extends HookConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Timetables"),
+        title: Text(AppLocale.of(context).terms_title),
       ),
       body: ListView.builder(
         itemCount: termsList.length + 2,
@@ -46,7 +47,7 @@ class SceneTermsList extends HookConsumerWidget {
           } else if (index == termsList.length) {
             return ListTile(
               leading: const Icon(Icons.add),
-              title: const Text("Create new timetable"),
+              title: Text(AppLocale.of(context).add_term_new),
               selected: false,
               onTap: () {
                 //RoutesMain.push(context, RoutesMain.routeTablesEdit);
@@ -55,7 +56,7 @@ class SceneTermsList extends HookConsumerWidget {
           } else {
             return ListTile(
               leading: const Icon(Icons.download_rounded),
-              title: const Text("Import from storage"),
+              title: Text(AppLocale.of(context).add_term_from_storage),
               selected: false,
               onTap: () {
                 model.startImport().then((success) {
@@ -63,8 +64,8 @@ class SceneTermsList extends HookConsumerWidget {
                     Navigator.of(context).pop();
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text("Failed to import"),
+                      SnackBar(
+                        content: Text(AppLocale.of(context).failed_to_import),
                       ),
                     );
                   }

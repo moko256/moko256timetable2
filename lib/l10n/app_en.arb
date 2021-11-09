@@ -1,0 +1,32 @@
+{
+    "app_name": "Timetables",
+
+    "action_cancel": "Cancel",
+    "action_update": "Update",
+
+    "period_n": "{num}",
+    "@period_n": {
+        "placeholders": {
+            "num": {}
+        }
+    },
+
+    "edit_class_info": "Edit class details",
+    "class_name": "Class name",
+    "class_room": "Class room",
+
+    "terms_title": "Timetables",
+    "add_term_new": "Create new",
+    "add_term_from_storage": "Import from storage",
+    "failed_to_import": "Failed to import.",
+
+    "edit_term_info": "Edit timetable details",
+    "term_name": "Timetable Name",
+    "term_start_at": "Starts at {date}",
+    "@term_start_at": {
+        "placeholders": {
+            "date": {}
+        }
+    },
+    "add_term_start_at": "Add start period"
+}

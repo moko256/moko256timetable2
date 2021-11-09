@@ -1,0 +1,23 @@
+{
+    "app_name": "時間割",
+
+    "action_cancel": "キャンセル",
+    "action_update": "更新",
+
+    "period_n": "{num}限",
+
+    "edit_class_info": "授業を編集",
+    "class_name": "授業名",
+    "class_room": "教室",
+
+    "terms_title": "時間割一覧",
+    "add_term_new": "新規作成",
+    "add_term_from_storage": "ストレージから追加",
+    "failed_to_import": "追加に失敗しました",
+
+    "edit_term_info": "時間割を編集",
+    "term_name": "時間割名",
+    "term_start_at": "{date} 開始",
+
+    "add_term_start_at": "開始時間を追加"
+}

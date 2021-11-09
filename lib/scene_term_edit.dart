@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:intl/intl.dart';
+import 'package:moko256timetable2/app_locale.dart';
 import 'package:moko256timetable2/model_main.dart';
 import 'package:moko256timetable2/model_view_main.dart';
 
@@ -22,15 +22,25 @@ class SceneTermEdit extends HookConsumerWidget {
 
     if (editing == null) return Container();
 
-    var weekDayNames = DateFormat.EEEE().dateSymbols.SHORTWEEKDAYS;
+    var weekDayNames =
+        AppLocale.getCurrentDateFormat(context).dateSymbols.SHORTWEEKDAYS;
 
     return AlertDialog(
-      title: const Text("Edit timetable details"),
+      title: Text(AppLocale.of(context).edit_term_info),
       content: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            TextField(
+              controller: TextEditingController(text: editing.initialName),
+              decoration:
+                  InputDecoration(hintText: AppLocale.of(context).term_name),
+              onChanged: (text) {
+                model.editName(text);
+              },
+            ),
+            const SizedBox(height: 16),
             for (var period in editing.periods)
               ListTile(
                 title: Text(
@@ -44,10 +54,9 @@ class SceneTermEdit extends HookConsumerWidget {
                   },
                 ),
               ),
-            const Divider(),
             ListTile(
               leading: const Icon(Icons.add),
-              title: const Text("Add period"),
+              title: Text(AppLocale.of(context).add_term_start_at),
               onTap: () {
                 showTimePicker(context: context, initialTime: TimeOfDay.now())
                     .then((value) {
@@ -58,6 +67,8 @@ class SceneTermEdit extends HookConsumerWidget {
                 });
               },
             ),
+            const Divider(),
+            const SizedBox(height: 8),
             Wrap(
               children: [
                 for (WeekDay weekDay in WeekDay.values)
@@ -79,13 +90,13 @@ class SceneTermEdit extends HookConsumerWidget {
       ),
       actions: [
         OutlinedButton(
-          child: const Text("Cancel"),
+          child: Text(AppLocale.of(context).action_cancel),
           onPressed: () {
             Navigator.of(context).pop();
           },
         ),
         ElevatedButton(
-          child: const Text("Update"),
+          child: Text(AppLocale.of(context).action_update),
           onPressed: () {
             model.commitEditing();
             Navigator.of(context).pop();
