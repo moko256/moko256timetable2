@@ -26,8 +26,7 @@ class SceneTermEdit extends HookConsumerWidget {
 
     return AlertDialog(
       title: const Text("Edit timetable details"),
-      content: SizedBox(
-        width: 250,
+      content: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,7 +71,7 @@ class SceneTermEdit extends HookConsumerWidget {
                         model.removeWeekDay(weekDay);
                       }
                     },
-                  )
+                  ),
               ],
             ),
           ],
