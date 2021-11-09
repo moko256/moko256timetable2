@@ -95,7 +95,8 @@ class ModelMain {
     var newTerm = await repoImport.importJson();
     if (newTerm == null) return false;
 
-    await repo.addTermAndClasses(newTerm.info, newTerm.classes);
+    var newKey = await repo.addTermAndClasses(newTerm.info, newTerm.classes);
+    await repo.setCurrentTerm(newKey);
 
     _termsUpdate.add(null);
     return true;

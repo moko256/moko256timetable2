@@ -70,13 +70,14 @@ class RepoMain {
     _terms[key] = info;
   }
 
-  Future<void> addTermAndClasses(
+  Future<EntityMainTermKey> addTermAndClasses(
     EntityMainTermInfo termInfo,
     EntityMainClassesMap classes,
   ) async {
     var newKey = EntityMainTermKey(_terms.length);
     _terms[newKey] = termInfo;
     _classes[newKey] = classes.map;
+    return newKey;
   }
 
   Future<void> removeTerm(EntityMainTermKey key) async {
