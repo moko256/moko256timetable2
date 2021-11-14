@@ -12,13 +12,14 @@ class SceneTermsList extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ModelMain model = ref.watch(ModelViewMain.modelMain);
-    AsyncSnapshot<EntityMainTerms?> termsSnapshot = useStream(model.terms);
+    AsyncSnapshot<EntityMainTermsAndCurrent?> termsSnapshot =
+        useStream(model.terms);
 
     ModelMainEditTerm modelEdit = ref.watch(ModelViewMain.modelMainEditTerm);
 
     var terms = termsSnapshot.data;
     List<MapEntry<EntityMainTermKey, EntityMainTermInfo>> termsList =
-        terms?.terms.entries.toList() ?? [];
+        terms?.terms?.entries.toList() ?? [];
 
     return Scaffold(
       appBar: AppBar(

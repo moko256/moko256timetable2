@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:moko256timetable2/repo_main.dart';
-import 'package:moko256timetable2/repo_main_import.dart';
+import 'package:moko256timetable2/repo_main_cache.dart';
+import 'package:moko256timetable2/repo_import.dart';
 import 'package:rxdart/rxdart.dart';
 
 part 'model_main.freezed.dart';
@@ -13,19 +13,21 @@ class ModelMain {
   Stream<EntityMainClasses?> get currentClasses => _currentClasses;
 
   final PublishSubject<void> _termsUpdate = PublishSubject();
-  final BehaviorSubject<EntityMainTerms?> _terms = BehaviorSubject.seeded(null);
-  Stream<EntityMainTerms?> get terms => _terms;
+  final BehaviorSubject<EntityMainTermsAndCurrent?> _terms = BehaviorSubject.seeded(null);
+  Stream<EntityMainTermsAndCurrent?> get terms => _terms;
 
   final PublishSubject<void> _currentClassesMapUpdate = PublishSubject();
 
-  RepoMain repo;
+  RepoMainCache repo;
   RepoMainImport repoImport;
   bool loaded = false;
 
   ModelMain(this.repo, this.repoImport) {
     _termsUpdate.listen((_) async {
       var terms = await repo.getTerms();
-      _terms.add(terms);
+      var currentTerm = await repo.getCurrentTerm();
+
+      _terms.add(EntityMainTermsAndCurrent(terms?.terms, currentTerm));
       _currentClassesMapUpdate.add(null);
     });
 
@@ -33,7 +35,8 @@ class ModelMain {
       var terms = await repo.getTerms();
       if (terms == null) return;
 
-      var key = terms.currentTerm;
+      var key = await repo.getCurrentTerm();
+      if (key == null) return;
 
       var classes = await repo.getClasses(key);
       if (classes == null) return;
@@ -177,7 +180,7 @@ class ModelMainEditTerm {
 
   void startEditing(EntityMainTermKey key) {
     model.terms.first.then((value) {
-      var info = value?.terms[key];
+      var info = value?.terms?[key];
       _currentEditing.add(
         EntityMainTermEditing(
             key, info?.name, info?.periods ?? {}, info?.weekDays ?? {}),
@@ -358,8 +361,15 @@ class EntityMainTerm with _$EntityMainTerm {
 class EntityMainTerms with _$EntityMainTerms {
   factory EntityMainTerms(
     Map<EntityMainTermKey, EntityMainTermInfo> terms,
-    EntityMainTermKey currentTerm,
   ) = _EntityMainTerms;
+}
+
+@freezed
+class EntityMainTermsAndCurrent with _$EntityMainTermsAndCurrent {
+  factory EntityMainTermsAndCurrent(
+    Map<EntityMainTermKey, EntityMainTermInfo>? terms,
+    EntityMainTermKey? currentTerm,
+  ) = _EntityMainTermsAndCurrent;
 }
 
 @freezed

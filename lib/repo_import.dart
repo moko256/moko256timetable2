@@ -4,8 +4,8 @@ import 'package:file_picker/file_picker.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:moko256timetable2/model_main.dart';
 
-part 'repo_main_import.freezed.dart';
-part 'repo_main_import.g.dart';
+part 'repo_import.freezed.dart';
+part 'repo_import.g.dart';
 
 class RepoMainImport {
   Future<EntityMainClassesImport?> importJson() async {

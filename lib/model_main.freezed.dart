@@ -1520,11 +1520,9 @@ abstract class _EntityMainTerm implements EntityMainTerm {
 class _$EntityMainTermsTearOff {
   const _$EntityMainTermsTearOff();
 
-  _EntityMainTerms call(Map<EntityMainTermKey, EntityMainTermInfo> terms,
-      EntityMainTermKey currentTerm) {
+  _EntityMainTerms call(Map<EntityMainTermKey, EntityMainTermInfo> terms) {
     return _EntityMainTerms(
       terms,
-      currentTerm,
     );
   }
 }
@@ -1536,7 +1534,6 @@ const $EntityMainTerms = _$EntityMainTermsTearOff();
 mixin _$EntityMainTerms {
   Map<EntityMainTermKey, EntityMainTermInfo> get terms =>
       throw _privateConstructorUsedError;
-  EntityMainTermKey get currentTerm => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $EntityMainTermsCopyWith<EntityMainTerms> get copyWith =>
@@ -1548,11 +1545,7 @@ abstract class $EntityMainTermsCopyWith<$Res> {
   factory $EntityMainTermsCopyWith(
           EntityMainTerms value, $Res Function(EntityMainTerms) then) =
       _$EntityMainTermsCopyWithImpl<$Res>;
-  $Res call(
-      {Map<EntityMainTermKey, EntityMainTermInfo> terms,
-      EntityMainTermKey currentTerm});
-
-  $EntityMainTermKeyCopyWith<$Res> get currentTerm;
+  $Res call({Map<EntityMainTermKey, EntityMainTermInfo> terms});
 }
 
 /// @nodoc
@@ -1567,25 +1560,13 @@ class _$EntityMainTermsCopyWithImpl<$Res>
   @override
   $Res call({
     Object? terms = freezed,
-    Object? currentTerm = freezed,
   }) {
     return _then(_value.copyWith(
       terms: terms == freezed
           ? _value.terms
           : terms // ignore: cast_nullable_to_non_nullable
               as Map<EntityMainTermKey, EntityMainTermInfo>,
-      currentTerm: currentTerm == freezed
-          ? _value.currentTerm
-          : currentTerm // ignore: cast_nullable_to_non_nullable
-              as EntityMainTermKey,
     ));
-  }
-
-  @override
-  $EntityMainTermKeyCopyWith<$Res> get currentTerm {
-    return $EntityMainTermKeyCopyWith<$Res>(_value.currentTerm, (value) {
-      return _then(_value.copyWith(currentTerm: value));
-    });
   }
 }
 
@@ -1596,12 +1577,7 @@ abstract class _$EntityMainTermsCopyWith<$Res>
           _EntityMainTerms value, $Res Function(_EntityMainTerms) then) =
       __$EntityMainTermsCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {Map<EntityMainTermKey, EntityMainTermInfo> terms,
-      EntityMainTermKey currentTerm});
-
-  @override
-  $EntityMainTermKeyCopyWith<$Res> get currentTerm;
+  $Res call({Map<EntityMainTermKey, EntityMainTermInfo> terms});
 }
 
 /// @nodoc
@@ -1618,17 +1594,12 @@ class __$EntityMainTermsCopyWithImpl<$Res>
   @override
   $Res call({
     Object? terms = freezed,
-    Object? currentTerm = freezed,
   }) {
     return _then(_EntityMainTerms(
       terms == freezed
           ? _value.terms
           : terms // ignore: cast_nullable_to_non_nullable
               as Map<EntityMainTermKey, EntityMainTermInfo>,
-      currentTerm == freezed
-          ? _value.currentTerm
-          : currentTerm // ignore: cast_nullable_to_non_nullable
-              as EntityMainTermKey,
     ));
   }
 }
@@ -1636,22 +1607,189 @@ class __$EntityMainTermsCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_EntityMainTerms implements _EntityMainTerms {
-  _$_EntityMainTerms(this.terms, this.currentTerm);
+  _$_EntityMainTerms(this.terms);
 
   @override
   final Map<EntityMainTermKey, EntityMainTermInfo> terms;
-  @override
-  final EntityMainTermKey currentTerm;
 
   @override
   String toString() {
-    return 'EntityMainTerms(terms: $terms, currentTerm: $currentTerm)';
+    return 'EntityMainTerms(terms: $terms)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _EntityMainTerms &&
+            (identical(other.terms, terms) ||
+                const DeepCollectionEquality().equals(other.terms, terms)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(terms);
+
+  @JsonKey(ignore: true)
+  @override
+  _$EntityMainTermsCopyWith<_EntityMainTerms> get copyWith =>
+      __$EntityMainTermsCopyWithImpl<_EntityMainTerms>(this, _$identity);
+}
+
+abstract class _EntityMainTerms implements EntityMainTerms {
+  factory _EntityMainTerms(Map<EntityMainTermKey, EntityMainTermInfo> terms) =
+      _$_EntityMainTerms;
+
+  @override
+  Map<EntityMainTermKey, EntityMainTermInfo> get terms =>
+      throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$EntityMainTermsCopyWith<_EntityMainTerms> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+class _$EntityMainTermsAndCurrentTearOff {
+  const _$EntityMainTermsAndCurrentTearOff();
+
+  _EntityMainTermsAndCurrent call(
+      Map<EntityMainTermKey, EntityMainTermInfo>? terms,
+      EntityMainTermKey? currentTerm) {
+    return _EntityMainTermsAndCurrent(
+      terms,
+      currentTerm,
+    );
+  }
+}
+
+/// @nodoc
+const $EntityMainTermsAndCurrent = _$EntityMainTermsAndCurrentTearOff();
+
+/// @nodoc
+mixin _$EntityMainTermsAndCurrent {
+  Map<EntityMainTermKey, EntityMainTermInfo>? get terms =>
+      throw _privateConstructorUsedError;
+  EntityMainTermKey? get currentTerm => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $EntityMainTermsAndCurrentCopyWith<EntityMainTermsAndCurrent> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $EntityMainTermsAndCurrentCopyWith<$Res> {
+  factory $EntityMainTermsAndCurrentCopyWith(EntityMainTermsAndCurrent value,
+          $Res Function(EntityMainTermsAndCurrent) then) =
+      _$EntityMainTermsAndCurrentCopyWithImpl<$Res>;
+  $Res call(
+      {Map<EntityMainTermKey, EntityMainTermInfo>? terms,
+      EntityMainTermKey? currentTerm});
+
+  $EntityMainTermKeyCopyWith<$Res>? get currentTerm;
+}
+
+/// @nodoc
+class _$EntityMainTermsAndCurrentCopyWithImpl<$Res>
+    implements $EntityMainTermsAndCurrentCopyWith<$Res> {
+  _$EntityMainTermsAndCurrentCopyWithImpl(this._value, this._then);
+
+  final EntityMainTermsAndCurrent _value;
+  // ignore: unused_field
+  final $Res Function(EntityMainTermsAndCurrent) _then;
+
+  @override
+  $Res call({
+    Object? terms = freezed,
+    Object? currentTerm = freezed,
+  }) {
+    return _then(_value.copyWith(
+      terms: terms == freezed
+          ? _value.terms
+          : terms // ignore: cast_nullable_to_non_nullable
+              as Map<EntityMainTermKey, EntityMainTermInfo>?,
+      currentTerm: currentTerm == freezed
+          ? _value.currentTerm
+          : currentTerm // ignore: cast_nullable_to_non_nullable
+              as EntityMainTermKey?,
+    ));
+  }
+
+  @override
+  $EntityMainTermKeyCopyWith<$Res>? get currentTerm {
+    if (_value.currentTerm == null) {
+      return null;
+    }
+
+    return $EntityMainTermKeyCopyWith<$Res>(_value.currentTerm!, (value) {
+      return _then(_value.copyWith(currentTerm: value));
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$EntityMainTermsAndCurrentCopyWith<$Res>
+    implements $EntityMainTermsAndCurrentCopyWith<$Res> {
+  factory _$EntityMainTermsAndCurrentCopyWith(_EntityMainTermsAndCurrent value,
+          $Res Function(_EntityMainTermsAndCurrent) then) =
+      __$EntityMainTermsAndCurrentCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {Map<EntityMainTermKey, EntityMainTermInfo>? terms,
+      EntityMainTermKey? currentTerm});
+
+  @override
+  $EntityMainTermKeyCopyWith<$Res>? get currentTerm;
+}
+
+/// @nodoc
+class __$EntityMainTermsAndCurrentCopyWithImpl<$Res>
+    extends _$EntityMainTermsAndCurrentCopyWithImpl<$Res>
+    implements _$EntityMainTermsAndCurrentCopyWith<$Res> {
+  __$EntityMainTermsAndCurrentCopyWithImpl(_EntityMainTermsAndCurrent _value,
+      $Res Function(_EntityMainTermsAndCurrent) _then)
+      : super(_value, (v) => _then(v as _EntityMainTermsAndCurrent));
+
+  @override
+  _EntityMainTermsAndCurrent get _value =>
+      super._value as _EntityMainTermsAndCurrent;
+
+  @override
+  $Res call({
+    Object? terms = freezed,
+    Object? currentTerm = freezed,
+  }) {
+    return _then(_EntityMainTermsAndCurrent(
+      terms == freezed
+          ? _value.terms
+          : terms // ignore: cast_nullable_to_non_nullable
+              as Map<EntityMainTermKey, EntityMainTermInfo>?,
+      currentTerm == freezed
+          ? _value.currentTerm
+          : currentTerm // ignore: cast_nullable_to_non_nullable
+              as EntityMainTermKey?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_EntityMainTermsAndCurrent implements _EntityMainTermsAndCurrent {
+  _$_EntityMainTermsAndCurrent(this.terms, this.currentTerm);
+
+  @override
+  final Map<EntityMainTermKey, EntityMainTermInfo>? terms;
+  @override
+  final EntityMainTermKey? currentTerm;
+
+  @override
+  String toString() {
+    return 'EntityMainTermsAndCurrent(terms: $terms, currentTerm: $currentTerm)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _EntityMainTermsAndCurrent &&
             (identical(other.terms, terms) ||
                 const DeepCollectionEquality().equals(other.terms, terms)) &&
             (identical(other.currentTerm, currentTerm) ||
@@ -1667,23 +1805,26 @@ class _$_EntityMainTerms implements _EntityMainTerms {
 
   @JsonKey(ignore: true)
   @override
-  _$EntityMainTermsCopyWith<_EntityMainTerms> get copyWith =>
-      __$EntityMainTermsCopyWithImpl<_EntityMainTerms>(this, _$identity);
+  _$EntityMainTermsAndCurrentCopyWith<_EntityMainTermsAndCurrent>
+      get copyWith =>
+          __$EntityMainTermsAndCurrentCopyWithImpl<_EntityMainTermsAndCurrent>(
+              this, _$identity);
 }
 
-abstract class _EntityMainTerms implements EntityMainTerms {
-  factory _EntityMainTerms(Map<EntityMainTermKey, EntityMainTermInfo> terms,
-      EntityMainTermKey currentTerm) = _$_EntityMainTerms;
+abstract class _EntityMainTermsAndCurrent implements EntityMainTermsAndCurrent {
+  factory _EntityMainTermsAndCurrent(
+      Map<EntityMainTermKey, EntityMainTermInfo>? terms,
+      EntityMainTermKey? currentTerm) = _$_EntityMainTermsAndCurrent;
 
   @override
-  Map<EntityMainTermKey, EntityMainTermInfo> get terms =>
+  Map<EntityMainTermKey, EntityMainTermInfo>? get terms =>
       throw _privateConstructorUsedError;
   @override
-  EntityMainTermKey get currentTerm => throw _privateConstructorUsedError;
+  EntityMainTermKey? get currentTerm => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$EntityMainTermsCopyWith<_EntityMainTerms> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$EntityMainTermsAndCurrentCopyWith<_EntityMainTermsAndCurrent>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
