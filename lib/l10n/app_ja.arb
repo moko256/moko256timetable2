@@ -13,6 +13,7 @@
     "terms_title": "時間割一覧",
     "add_term_new": "新規作成",
     "add_term_from_storage": "ストレージから追加",
+    "add_term_from_clipboard": "クリップボードから追加",
     "failed_to_import": "追加に失敗しました",
 
     "edit_term_info_new": "時間割を追加",

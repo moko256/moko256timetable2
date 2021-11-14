@@ -21,12 +21,25 @@ class SceneTermsList extends HookConsumerWidget {
     List<MapEntry<EntityMainTermKey, EntityMainTermInfo>> termsList =
         terms?.terms?.entries.toList() ?? [];
 
+    var importKind = [
+      _ImportKind(
+        Icons.description,
+        AppLocale.of(context).add_term_from_storage,
+        model.startImportFromStorage,
+      ),
+      _ImportKind(
+        Icons.content_paste,
+        AppLocale.of(context).add_term_from_clipboard,
+        model.startImportFromClipboard,
+      ),
+    ];
+
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocale.of(context).terms_title),
       ),
       body: ListView.builder(
-        itemCount: termsList.length + 2,
+        itemCount: termsList.length + 2 + importKind.length,
         itemBuilder: (BuildContext context, int index) {
           if (index < termsList.length) {
             var term = termsList[index];
@@ -46,32 +59,32 @@ class SceneTermsList extends HookConsumerWidget {
               ),
             );
           } else if (index == termsList.length) {
+            return const Divider();
+          } else if (index == termsList.length + 1) {
             return ListTile(
               leading: const Icon(Icons.add),
               title: Text(AppLocale.of(context).add_term_new),
-              selected: false,
               onTap: () {
                 modelEdit.startEditing(null);
                 RoutesMain.push(context, RoutesMain.routeTablesEdit);
               },
             );
           } else {
+            var kind = importKind[index - termsList.length - 2];
             return ListTile(
-              leading: const Icon(Icons.download_rounded),
-              title: Text(AppLocale.of(context).add_term_from_storage),
-              selected: false,
-              onTap: () {
-                model.startImport().then((success) {
-                  if (success) {
-                    Navigator.of(context).pop();
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(AppLocale.of(context).failed_to_import),
-                      ),
-                    );
-                  }
-                });
+              leading: Icon(kind.icon),
+              title: Text(kind.title),
+              onTap: () async {
+                var success = await kind.import();
+                if (success) {
+                  Navigator.of(context).pop();
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(AppLocale.of(context).failed_to_import),
+                    ),
+                  );
+                }
               },
             );
           }
@@ -79,4 +92,12 @@ class SceneTermsList extends HookConsumerWidget {
       ).build(context),
     );
   }
+}
+
+class _ImportKind {
+  IconData icon;
+  String title;
+  Future<bool> Function() import;
+
+  _ImportKind(this.icon, this.title, this.import);
 }

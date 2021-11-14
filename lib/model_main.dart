@@ -100,8 +100,15 @@ class ModelMain {
     _termsUpdate.add(null);
   }
 
-  Future<bool> startImport() async {
-    var newTerm = await repoImport.importJson();
+  Future<bool> startImportFromStorage() async {
+    return _import(await repoImport.importJsonFromStorage());
+  }
+
+  Future<bool> startImportFromClipboard() async {
+    return _import(await repoImport.importJsonFromClipboard());
+  }
+
+  Future<bool> _import(EntityMainClassesImport? newTerm) async {
     if (newTerm == null) return false;
 
     var newKey = await repo.addTermAndClasses(newTerm.info, newTerm.classes);

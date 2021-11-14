@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/services.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:moko256timetable2/model_main.dart';
 
@@ -8,17 +9,22 @@ part 'repo_import.freezed.dart';
 part 'repo_import.g.dart';
 
 class RepoMainImport {
-  Future<EntityMainClassesImport?> importJson() async {
-    FilePickerResult? result =
-        await FilePicker.platform.pickFiles(withReadStream: true);
+  Future<EntityMainClassesImport?> importJsonFromStorage() async {
+    var fileResult = await FilePicker.platform.pickFiles(withReadStream: true);
 
-    var stream = await result?.files.singleOrNull?.readStream?.first;
+    var stream = await fileResult?.files.singleOrNull?.readStream?.first;
     if (stream != null) {
-      try {
-        return _classesFromJson(const Utf8Decoder().convert(stream));
-      } catch (e) {
-        return null;
-      }
+      return _classesFromJson(const Utf8Decoder().convert(stream));
+    } else {
+      return null;
+    }
+  }
+
+  Future<EntityMainClassesImport?> importJsonFromClipboard() async {
+    var clipResult = await Clipboard.getData(Clipboard.kTextPlain);
+    var text = clipResult?.text;
+    if (text != null) {
+      return _classesFromJson(text);
     } else {
       return null;
     }
@@ -26,29 +32,33 @@ class RepoMainImport {
 }
 
 EntityMainClassesImport? _classesFromJson(String value) {
-  var jsonTimetable = _ImportingTimetable.fromJson(json.decode(value));
+  try {
+    var jsonTimetable = _ImportingTimetable.fromJson(json.decode(value));
 
-  return EntityMainClassesImport(
-    EntityMainTermInfo(
-      jsonTimetable.info.name,
-      {
-        for (int i = 0; i < jsonTimetable.info.periodMax; i++)
-          Duration(hours: i)
-      },
-      jsonTimetable.info.weekDays.map(_weekdayFromString).toSet(),
-    ),
-    EntityMainClassesMap({
-      for (var item in jsonTimetable.classes
-          .where((item) => item.room != "" || item.name != ""))
-        EntityMainClassWhere(
-          _weekdayFromString(item.weekDay),
-          Duration(hours: item.period),
-        ): EntityMainClassInfo(
-          item.name,
-          item.room,
-        )
-    }),
-  );
+    return EntityMainClassesImport(
+      EntityMainTermInfo(
+        jsonTimetable.info.name,
+        {
+          for (int i = 0; i < jsonTimetable.info.periodMax; i++)
+            Duration(hours: i)
+        },
+        jsonTimetable.info.weekDays.map(_weekdayFromString).toSet(),
+      ),
+      EntityMainClassesMap({
+        for (var item in jsonTimetable.classes
+            .where((item) => item.room != "" || item.name != ""))
+          EntityMainClassWhere(
+            _weekdayFromString(item.weekDay),
+            Duration(hours: item.period),
+          ): EntityMainClassInfo(
+            item.name,
+            item.room,
+          )
+      }),
+    );
+  } catch (e) {
+    return null;
+  }
 }
 
 WeekDay _weekdayFromString(String value) {

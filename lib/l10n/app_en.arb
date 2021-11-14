@@ -18,6 +18,7 @@
     "terms_title": "Timetables",
     "add_term_new": "Create new",
     "add_term_from_storage": "Import from storage",
+    "add_term_from_clipboard": "Import from clipboard",
     "failed_to_import": "Failed to import.",
 
     "edit_term_info_new": "Create timetable",
