@@ -57,6 +57,12 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+
+    packagingOptions {
+        exclude '/kotlin/**'
+        exclude '/META-INF/*.version'
+        exclude '/META-INF/*.kotlin_module'
+    }
 }
 
 flutter {
