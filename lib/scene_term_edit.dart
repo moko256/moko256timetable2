@@ -26,7 +26,9 @@ class SceneTermEdit extends HookConsumerWidget {
         AppLocale.getCurrentDateFormat(context).dateSymbols.SHORTWEEKDAYS;
 
     return AlertDialog(
-      title: Text(AppLocale.of(context).edit_term_info),
+      title: Text(editing.key == null
+          ? AppLocale.of(context).edit_term_info_new
+          : AppLocale.of(context).edit_term_info_update),
       content: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,

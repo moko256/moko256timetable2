@@ -25,18 +25,14 @@ class RepoMainCache extends RepoMain {
   }
 
   @override
-  Future<EntityMainClassesMap?> getClasses(
+  Future<EntityMainClassesMap> getClasses(
     EntityMainTermKey key,
   ) async {
     var result = _classes[key];
     if (result == null) {
       var classes = await _persistent.getClasses(key);
-      if (classes != null) {
-        _classes[key] = classes.map;
-        return classes;
-      } else {
-        return null;
-      }
+      _classes[key] = classes.map;
+      return classes;
     } else {
       return EntityMainClassesMap(result);
     }
@@ -55,6 +51,7 @@ class RepoMainCache extends RepoMain {
     EntityMainClassInfo info,
   ) async {
     await _persistent.updateClass(term, where, info);
+    getClasses(term);
     _classes[term]?[where] = info;
   }
 
@@ -64,7 +61,15 @@ class RepoMainCache extends RepoMain {
     EntityMainClassWhere where,
   ) async {
     await _persistent.removeClass(term, where);
+    getClasses(term);
     _classes[term]?.remove(where);
+  }
+
+  @override
+  Future<EntityMainTermKey> addTerm(EntityMainTermInfo info) async {
+    var key = await _persistent.addTerm(info);
+    _terms?[key] = info;
+    return key;
   }
 
   @override

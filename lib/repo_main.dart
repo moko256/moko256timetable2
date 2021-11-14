@@ -3,7 +3,7 @@ import 'package:moko256timetable2/model_main.dart';
 abstract class RepoMain {
   Future<EntityMainTerms?> getTerms();
 
-  Future<EntityMainClassesMap?> getClasses(
+  Future<EntityMainClassesMap> getClasses(
     EntityMainTermKey key,
   );
 
@@ -18,6 +18,10 @@ abstract class RepoMain {
   Future<void> removeClass(
     EntityMainTermKey term,
     EntityMainClassWhere where,
+  );
+
+  Future<EntityMainTermKey> addTerm(
+    EntityMainTermInfo info,
   );
 
   Future<void> updateTerm(

@@ -50,82 +50,106 @@ class ComponentClassesTableOrSpinner extends HookConsumerWidget {
     ModelMain model = ref.watch(ModelViewMain.modelMain);
     AsyncSnapshot<EntityMainClasses?> classesSnapshot =
         useStream(model.currentClasses);
+    AsyncSnapshot<EntityMainTermsAndCurrent?> termsSnapshot =
+        useStream(model.terms);
 
-    ModelMainEditClass modelEdit = ref.watch(ModelViewMain.modelMainEditClass);
+    ModelMainEditClass modelEditClass =
+        ref.watch(ModelViewMain.modelMainEditClass);
+    ModelMainEditTerm modelEditTerm =
+        ref.watch(ModelViewMain.modelMainEditTerm);
 
     var classes = classesSnapshot.data;
-    if (classes != null) {
-      var periods = classes.info.periods.toList();
-      var weekDays = classes.info.weekDays.toList();
 
-      var weekDayNames =
-          AppLocale.getCurrentDateFormat(context).dateSymbols.WEEKDAYS;
+    if (classes == null) {
+      if (termsSnapshot.data != null) {
+        modelEditTerm.startEditing(null);
+        Future(() {
+          RoutesMain.push(context, RoutesMain.routeTablesEdit);
+        });
+      }
 
-      return Container(
-        padding: const EdgeInsets.all(2),
-        child: LayoutGrid(
-          columnSizes: [
-            const IntrinsicContentTrackSize(),
-            for (var _ in weekDays) const FlexibleTrackSize(1),
-          ],
-          rowSizes: [
-            const IntrinsicContentTrackSize(),
-            for (var _ in periods) const FlexibleTrackSize(1),
-          ],
-          children: [
-            for (var wIdx = 0; wIdx < weekDays.length; wIdx++)
-              GridPlacement(
-                columnStart: wIdx + 1,
-                rowStart: 0,
+      return Center(
+        child: ElevatedButton(
+          child: Text(AppLocale.of(context).add_term_new),
+          onPressed: () {
+            modelEditTerm.startEditing(null);
+            RoutesMain.push(context, RoutesMain.routeTablesEdit);
+          },
+        ),
+      );
+    }
+
+    if (termsSnapshot.data == null) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
+    var periods = classes.info.periods.toList();
+    var weekDays = classes.info.weekDays.toList();
+
+    var weekDayNames =
+        AppLocale.getCurrentDateFormat(context).dateSymbols.WEEKDAYS;
+
+    return Container(
+      padding: const EdgeInsets.all(2),
+      child: LayoutGrid(
+        columnSizes: [
+          const IntrinsicContentTrackSize(),
+          for (var _ in weekDays) const FlexibleTrackSize(1),
+        ],
+        rowSizes: [
+          const IntrinsicContentTrackSize(),
+          for (var _ in periods) const FlexibleTrackSize(1),
+        ],
+        children: [
+          for (var wIdx = 0; wIdx < weekDays.length; wIdx++)
+            GridPlacement(
+              columnStart: wIdx + 1,
+              rowStart: 0,
+              child: Container(
+                padding: const EdgeInsets.all(4),
+                child: Text(weekDayNames[weekDays[wIdx].index]),
+              ),
+            ),
+          for (var pIdx = 0; pIdx < periods.length; pIdx++)
+            GridPlacement(
+              columnStart: 0,
+              rowStart: pIdx + 1,
+              child: Center(
                 child: Container(
                   padding: const EdgeInsets.all(4),
-                  child: Text(weekDayNames[weekDays[wIdx].index]),
-                ),
-              ),
-            for (var pIdx = 0; pIdx < periods.length; pIdx++)
-              GridPlacement(
-                columnStart: 0,
-                rowStart: pIdx + 1,
-                child: Center(
-                  child: Container(
-                    padding: const EdgeInsets.all(4),
-                    child: Text(
-                      AppLocale.of(context).period_n(pIdx + 1),
-                      textAlign: TextAlign.center,
-                    ),
+                  child: Text(
+                    AppLocale.of(context).period_n(pIdx + 1),
+                    textAlign: TextAlign.center,
                   ),
                 ),
               ),
-            for (var pIdx = 0; pIdx < periods.length; pIdx++)
-              for (var wIdx = 0; wIdx < weekDays.length; wIdx++)
-                () {
-                  var where =
-                      EntityMainClassWhere(weekDays[wIdx], periods[pIdx]);
-                  var info = classes.classes.map[where];
-                  return GridPlacement(
-                    columnStart: wIdx + 1,
-                    rowStart: pIdx + 1,
-                    child: SizedBox.expand(
-                      child: GestureDetector(
-                        child: ComponentDetails(
-                          where,
-                          info,
-                          classes.colors[info] ?? 0.0,
-                        ),
-                        onTap: () {
-                          modelEdit.startEditing(where);
-                          RoutesMain.push(context, RoutesMain.routeEdit);
-                        },
+            ),
+          for (var pIdx = 0; pIdx < periods.length; pIdx++)
+            for (var wIdx = 0; wIdx < weekDays.length; wIdx++)
+              () {
+                var where = EntityMainClassWhere(weekDays[wIdx], periods[pIdx]);
+                var info = classes.classes.map[where];
+                return GridPlacement(
+                  columnStart: wIdx + 1,
+                  rowStart: pIdx + 1,
+                  child: SizedBox.expand(
+                    child: GestureDetector(
+                      child: ComponentDetails(
+                        where,
+                        info,
+                        classes.colors[info] ?? 0.0,
                       ),
+                      onTap: () {
+                        modelEditClass.startEditing(where);
+                        RoutesMain.push(context, RoutesMain.routeEdit);
+                      },
                     ),
-                  );
-                }(),
-          ],
-        ),
-      );
-    } else {
-      return const Center(child: CircularProgressIndicator());
-    }
+                  ),
+                );
+              }(),
+        ],
+      ),
+    );
   }
 }
 

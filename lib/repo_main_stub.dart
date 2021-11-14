@@ -12,7 +12,9 @@ class RepoMainDiskStub extends RepoMain {
   }
 
   @override
-  Future<EntityMainClassesMap?> getClasses(EntityMainTermKey key) async {}
+  Future<EntityMainClassesMap> getClasses(EntityMainTermKey key) async {
+    return EntityMainClassesMap({});
+  }
 
   @override
   Future<EntityMainTermKey?> getCurrentTerm() async {}
@@ -33,6 +35,12 @@ class RepoMainDiskStub extends RepoMain {
   @override
   Future<void> updateClass(EntityMainTermKey term, EntityMainClassWhere where,
       EntityMainClassInfo info) async {}
+
+  @override
+  Future<EntityMainTermKey> addTerm(EntityMainTermInfo info) async {
+    _termId++;
+    return EntityMainTermKey(_termId);
+  }
 
   @override
   Future<void> updateTerm(

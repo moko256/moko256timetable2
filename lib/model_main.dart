@@ -13,7 +13,8 @@ class ModelMain {
   Stream<EntityMainClasses?> get currentClasses => _currentClasses;
 
   final PublishSubject<void> _termsUpdate = PublishSubject();
-  final BehaviorSubject<EntityMainTermsAndCurrent?> _terms = BehaviorSubject.seeded(null);
+  final BehaviorSubject<EntityMainTermsAndCurrent?> _terms =
+      BehaviorSubject.seeded(null);
   Stream<EntityMainTermsAndCurrent?> get terms => _terms;
 
   final PublishSubject<void> _currentClassesMapUpdate = PublishSubject();
@@ -39,7 +40,6 @@ class ModelMain {
       if (key == null) return;
 
       var classes = await repo.getClasses(key);
-      if (classes == null) return;
 
       var currentTerm = terms.terms[key];
       if (currentTerm == null) return;
@@ -77,6 +77,12 @@ class ModelMain {
     if (key == null) return;
     await repo.removeClass(key, where);
     _currentClassesMapUpdate.add(null);
+  }
+
+  void addTerm(EntityMainTermInfo info) async {
+    var key = await repo.addTerm(info);
+    await repo.setCurrentTerm(key);
+    _termsUpdate.add(null);
   }
 
   void updateTerm(EntityMainTermKey key, EntityMainTermInfo info) async {
@@ -178,7 +184,9 @@ class ModelMainEditTerm {
 
   ModelMainEditTerm(this.model);
 
-  void startEditing(EntityMainTermKey key) {
+  bool isEditing() => _currentEditing.valueOrNull != null;
+
+  void startEditing(EntityMainTermKey? key) {
     model.terms.first.then((value) {
       var info = value?.terms?[key];
       _currentEditing.add(
@@ -233,15 +241,22 @@ class ModelMainEditTerm {
 
   void commitEditing() {
     var editing = _currentEditing.valueOrNull;
-    var key = editing?.key;
 
-    if (key == null) return;
+    if (editing == null) return;
 
-    model.updateTerm(
-      key,
-      EntityMainTermInfo(
-          _editingName ?? "", editing?.periods ?? {}, editing?.weekDays ?? {}),
+    var key = editing.key;
+
+    var termInfo = EntityMainTermInfo(
+      _editingName ?? "",
+      editing.periods,
+      editing.weekDays,
     );
+
+    if (key == null) {
+      model.addTerm(termInfo);
+    } else {
+      model.updateTerm(key, termInfo);
+    }
 
     _currentEditing.add(null);
     _editingName = null;
@@ -375,7 +390,7 @@ class EntityMainTermsAndCurrent with _$EntityMainTermsAndCurrent {
 @freezed
 class EntityMainTermEditing with _$EntityMainTermEditing {
   factory EntityMainTermEditing(
-    EntityMainTermKey key,
+    EntityMainTermKey? key,
     String? initialName,
     Set<Duration> periods,
     Set<WeekDay> weekDays,

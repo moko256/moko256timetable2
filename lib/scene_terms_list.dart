@@ -51,7 +51,8 @@ class SceneTermsList extends HookConsumerWidget {
               title: Text(AppLocale.of(context).add_term_new),
               selected: false,
               onTap: () {
-                //RoutesMain.push(context, RoutesMain.routeTablesEdit);
+                modelEdit.startEditing(null);
+                RoutesMain.push(context, RoutesMain.routeTablesEdit);
               },
             );
           } else {

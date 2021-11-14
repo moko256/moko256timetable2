@@ -1831,7 +1831,7 @@ abstract class _EntityMainTermsAndCurrent implements EntityMainTermsAndCurrent {
 class _$EntityMainTermEditingTearOff {
   const _$EntityMainTermEditingTearOff();
 
-  _EntityMainTermEditing call(EntityMainTermKey key, String? initialName,
+  _EntityMainTermEditing call(EntityMainTermKey? key, String? initialName,
       Set<Duration> periods, Set<WeekDay> weekDays) {
     return _EntityMainTermEditing(
       key,
@@ -1847,7 +1847,7 @@ const $EntityMainTermEditing = _$EntityMainTermEditingTearOff();
 
 /// @nodoc
 mixin _$EntityMainTermEditing {
-  EntityMainTermKey get key => throw _privateConstructorUsedError;
+  EntityMainTermKey? get key => throw _privateConstructorUsedError;
   String? get initialName => throw _privateConstructorUsedError;
   Set<Duration> get periods => throw _privateConstructorUsedError;
   Set<WeekDay> get weekDays => throw _privateConstructorUsedError;
@@ -1863,12 +1863,12 @@ abstract class $EntityMainTermEditingCopyWith<$Res> {
           $Res Function(EntityMainTermEditing) then) =
       _$EntityMainTermEditingCopyWithImpl<$Res>;
   $Res call(
-      {EntityMainTermKey key,
+      {EntityMainTermKey? key,
       String? initialName,
       Set<Duration> periods,
       Set<WeekDay> weekDays});
 
-  $EntityMainTermKeyCopyWith<$Res> get key;
+  $EntityMainTermKeyCopyWith<$Res>? get key;
 }
 
 /// @nodoc
@@ -1891,7 +1891,7 @@ class _$EntityMainTermEditingCopyWithImpl<$Res>
       key: key == freezed
           ? _value.key
           : key // ignore: cast_nullable_to_non_nullable
-              as EntityMainTermKey,
+              as EntityMainTermKey?,
       initialName: initialName == freezed
           ? _value.initialName
           : initialName // ignore: cast_nullable_to_non_nullable
@@ -1908,8 +1908,12 @@ class _$EntityMainTermEditingCopyWithImpl<$Res>
   }
 
   @override
-  $EntityMainTermKeyCopyWith<$Res> get key {
-    return $EntityMainTermKeyCopyWith<$Res>(_value.key, (value) {
+  $EntityMainTermKeyCopyWith<$Res>? get key {
+    if (_value.key == null) {
+      return null;
+    }
+
+    return $EntityMainTermKeyCopyWith<$Res>(_value.key!, (value) {
       return _then(_value.copyWith(key: value));
     });
   }
@@ -1923,13 +1927,13 @@ abstract class _$EntityMainTermEditingCopyWith<$Res>
       __$EntityMainTermEditingCopyWithImpl<$Res>;
   @override
   $Res call(
-      {EntityMainTermKey key,
+      {EntityMainTermKey? key,
       String? initialName,
       Set<Duration> periods,
       Set<WeekDay> weekDays});
 
   @override
-  $EntityMainTermKeyCopyWith<$Res> get key;
+  $EntityMainTermKeyCopyWith<$Res>? get key;
 }
 
 /// @nodoc
@@ -1954,7 +1958,7 @@ class __$EntityMainTermEditingCopyWithImpl<$Res>
       key == freezed
           ? _value.key
           : key // ignore: cast_nullable_to_non_nullable
-              as EntityMainTermKey,
+              as EntityMainTermKey?,
       initialName == freezed
           ? _value.initialName
           : initialName // ignore: cast_nullable_to_non_nullable
@@ -1978,7 +1982,7 @@ class _$_EntityMainTermEditing implements _EntityMainTermEditing {
       this.key, this.initialName, this.periods, this.weekDays);
 
   @override
-  final EntityMainTermKey key;
+  final EntityMainTermKey? key;
   @override
   final String? initialName;
   @override
@@ -2024,11 +2028,11 @@ class _$_EntityMainTermEditing implements _EntityMainTermEditing {
 }
 
 abstract class _EntityMainTermEditing implements EntityMainTermEditing {
-  factory _EntityMainTermEditing(EntityMainTermKey key, String? initialName,
+  factory _EntityMainTermEditing(EntityMainTermKey? key, String? initialName,
       Set<Duration> periods, Set<WeekDay> weekDays) = _$_EntityMainTermEditing;
 
   @override
-  EntityMainTermKey get key => throw _privateConstructorUsedError;
+  EntityMainTermKey? get key => throw _privateConstructorUsedError;
   @override
   String? get initialName => throw _privateConstructorUsedError;
   @override
