@@ -53,7 +53,7 @@ class DialogTermEdit extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextField(
-              controller: TextEditingController(text: initialName),
+              controller: TextEditingController(text: model.state.name),
               decoration:
                   InputDecoration(hintText: AppLocale.of(context).term_name),
               onChanged: (text) {
