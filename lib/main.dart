@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:moko256timetable2/app_locale.dart';
-import 'package:moko256timetable2/model_main_repo_impl.dart';
 import 'package:moko256timetable2/routes_main.dart';
 
 void main() async {
-  await ModelMainRepoImpl.initialize();
-
   runApp(const MainApp());
 }
 

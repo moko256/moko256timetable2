@@ -10,24 +10,29 @@ import 'model_main_repo.dart';
 
 part 'model_main_repo_impl.g.dart';
 
-@immutable
 class ModelMainRepoImpl extends ModelMainRepo {
+  var initializeFuture = initialize();
+
   static Future<void> initialize() async {
     Hive.init((await getApplicationSupportDirectory()).path);
     Hive.registerAdapter(HiveTermInfoAdapter());
     Hive.registerAdapter(HiveClassInfoAdapter());
   }
 
-  Future<Box<int>> properties() {
-    return Hive.openBox<int>("properties");
+  Future<Box<int>> properties() async {
+    await initializeFuture;
+    return await Hive.openBox<int>("properties");
   }
 
-  Future<Box<_HiveTermInfo>> terms() {
-    return Hive.openBox<_HiveTermInfo>("terms");
+  Future<Box<_HiveTermInfo>> terms() async {
+    await initializeFuture;
+    return await Hive.openBox<_HiveTermInfo>("terms");
   }
 
-  Future<Box<_HiveClassInfo>> classes(ModelVoTermKey key) {
-    return Hive.openBox<_HiveClassInfo>("classes&${key.id.toRadixString(16)}");
+  Future<Box<_HiveClassInfo>> classes(ModelVoTermKey key) async {
+    await initializeFuture;
+    return await Hive.openBox<_HiveClassInfo>(
+        "classes&${key.id.toRadixString(16)}");
   }
 
   @override
