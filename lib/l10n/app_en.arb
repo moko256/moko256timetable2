@@ -3,6 +3,7 @@
 
     "action_cancel": "Cancel",
     "action_update": "Update",
+    "action_delete": "Delete",
 
     "period_n": "{num}",
     "@period_n": {
@@ -21,6 +22,7 @@
     "add_term_from_clipboard": "Import from clipboard",
     "failed_to_import": "Failed to import.",
 
+    "confirm_delete_term": "This timetable will now be deleted.",
     "edit_term_info_new": "Create timetable",
     "edit_term_info_update": "Edit timetable details",
     "term_name": "Timetable Name",

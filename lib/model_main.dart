@@ -80,7 +80,7 @@ class ModelMain extends StateNotifier<ModelState> {
   void removeTerm(ModelVoTermKey key) async {
     await repo.removeTerm(key);
 
-    var terms = state.terms?.terms ?? {};
+    var terms = {...state.terms?.terms ?? {}};
     terms.remove(key);
 
     if (key == state.currentTermKey) {

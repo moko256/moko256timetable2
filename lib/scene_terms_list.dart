@@ -52,29 +52,59 @@ class SceneTermsList extends ConsumerWidget {
                 controller.selectTerm(term.key);
                 Navigator.of(context).pop();
               },
-              trailing: IconButton(
-                icon: const Icon(Icons.edit),
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) => DialogTermEdit(
-                      false,
-                      term.value.name,
-                      term.value.weekDays.toList(),
-                      term.value.maxPeriod,
-                      (arg) {
-                        controller.updateTerm(
-                          term.key,
-                          ModelVoTermInfo(
-                            arg.name,
-                            arg.weekDays,
-                            arg.periodMax,
-                          ),
-                        );
-                      },
-                    ),
-                  );
-                },
+              trailing: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.delete),
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) => AlertDialog(
+                          content:
+                              Text(AppLocale.of(context).confirm_delete_term),
+                          actions: [
+                            OutlinedButton(
+                                child:
+                                    Text(AppLocale.of(context).action_cancel),
+                                onPressed: () => Navigator.of(context).pop()),
+                            ElevatedButton(
+                                child:
+                                    Text(AppLocale.of(context).action_delete),
+                                onPressed: () {
+                                  controller.removeTerm(term.key);
+                                  Navigator.of(context).pop();
+                                }),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.edit),
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) => DialogTermEdit(
+                          false,
+                          term.value.name,
+                          term.value.weekDays.toList(),
+                          term.value.maxPeriod,
+                          (arg) {
+                            controller.updateTerm(
+                              term.key,
+                              ModelVoTermInfo(
+                                arg.name,
+                                arg.weekDays,
+                                arg.periodMax,
+                              ),
+                            );
+                          },
+                        ),
+                      );
+                    },
+                  ),
+                ],
               ),
             );
           } else if (index == termsList.length) {

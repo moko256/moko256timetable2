@@ -3,6 +3,7 @@
 
     "action_cancel": "キャンセル",
     "action_update": "更新",
+    "action_delete": "削除",
 
     "period_n": "{num}限",
 
@@ -16,6 +17,7 @@
     "add_term_from_clipboard": "クリップボードから追加",
     "failed_to_import": "追加に失敗しました",
 
+    "confirm_delete_term": "この時間割を削除します。",
     "edit_term_info_new": "時間割を追加",
     "edit_term_info_update": "時間割を編集",
     "term_name": "時間割名",
