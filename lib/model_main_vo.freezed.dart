@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'model_main_vo.dart';
@@ -123,14 +124,14 @@ class _$_ModelVoTerms with DiagnosticableTreeMixin implements _ModelVoTerms {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _ModelVoTerms &&
-            (identical(other.terms, terms) ||
-                const DeepCollectionEquality().equals(other.terms, terms)));
+        (other.runtimeType == runtimeType &&
+            other is _ModelVoTerms &&
+            const DeepCollectionEquality().equals(other.terms, terms));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(terms);
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(terms));
 
   @JsonKey(ignore: true)
   @override
@@ -143,8 +144,7 @@ abstract class _ModelVoTerms implements ModelVoTerms {
       _$_ModelVoTerms;
 
   @override
-  Map<ModelVoTermKey, ModelVoTermInfo> get terms =>
-      throw _privateConstructorUsedError;
+  Map<ModelVoTermKey, ModelVoTermInfo> get terms;
   @override
   @JsonKey(ignore: true)
   _$ModelVoTermsCopyWith<_ModelVoTerms> get copyWith =>
@@ -264,14 +264,14 @@ class _$_ModelVoTermKey
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _ModelVoTermKey &&
-            (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)));
+        (other.runtimeType == runtimeType &&
+            other is _ModelVoTermKey &&
+            const DeepCollectionEquality().equals(other.id, id));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(id);
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(id));
 
   @JsonKey(ignore: true)
   @override
@@ -283,7 +283,7 @@ abstract class _ModelVoTermKey implements ModelVoTermKey {
   const factory _ModelVoTermKey(int id) = _$_ModelVoTermKey;
 
   @override
-  int get id => throw _privateConstructorUsedError;
+  int get id;
   @override
   @JsonKey(ignore: true)
   _$ModelVoTermKeyCopyWith<_ModelVoTermKey> get copyWith =>
@@ -433,23 +433,19 @@ class _$_ModelVoTermInfo
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _ModelVoTermInfo &&
-            (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.weekDays, weekDays) ||
-                const DeepCollectionEquality()
-                    .equals(other.weekDays, weekDays)) &&
-            (identical(other.maxPeriod, maxPeriod) ||
-                const DeepCollectionEquality()
-                    .equals(other.maxPeriod, maxPeriod)));
+        (other.runtimeType == runtimeType &&
+            other is _ModelVoTermInfo &&
+            const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality().equals(other.weekDays, weekDays) &&
+            const DeepCollectionEquality().equals(other.maxPeriod, maxPeriod));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(weekDays) ^
-      const DeepCollectionEquality().hash(maxPeriod);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(weekDays),
+      const DeepCollectionEquality().hash(maxPeriod));
 
   @JsonKey(ignore: true)
   @override
@@ -462,11 +458,11 @@ abstract class _ModelVoTermInfo implements ModelVoTermInfo {
       String name, List<WeekDay> weekDays, int maxPeriod) = _$_ModelVoTermInfo;
 
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  List<WeekDay> get weekDays => throw _privateConstructorUsedError;
+  List<WeekDay> get weekDays;
   @override
-  int get maxPeriod => throw _privateConstructorUsedError;
+  int get maxPeriod;
   @override
   @JsonKey(ignore: true)
   _$ModelVoTermInfoCopyWith<_ModelVoTermInfo> get copyWith =>
@@ -587,14 +583,14 @@ class _$_ModelVoClasses
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _ModelVoClasses &&
-            (identical(other.classes, classes) ||
-                const DeepCollectionEquality().equals(other.classes, classes)));
+        (other.runtimeType == runtimeType &&
+            other is _ModelVoClasses &&
+            const DeepCollectionEquality().equals(other.classes, classes));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(classes);
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(classes));
 
   @JsonKey(ignore: true)
   @override
@@ -607,8 +603,7 @@ abstract class _ModelVoClasses implements ModelVoClasses {
       Map<ModelVoClassKey, ModelVoClassInfo> classes) = _$_ModelVoClasses;
 
   @override
-  Map<ModelVoClassKey, ModelVoClassInfo> get classes =>
-      throw _privateConstructorUsedError;
+  Map<ModelVoClassKey, ModelVoClassInfo> get classes;
   @override
   @JsonKey(ignore: true)
   _$ModelVoClassesCopyWith<_ModelVoClasses> get copyWith =>
@@ -743,19 +738,17 @@ class _$_ModelVoClassKey
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _ModelVoClassKey &&
-            (identical(other.weekDay, weekDay) ||
-                const DeepCollectionEquality()
-                    .equals(other.weekDay, weekDay)) &&
-            (identical(other.period, period) ||
-                const DeepCollectionEquality().equals(other.period, period)));
+        (other.runtimeType == runtimeType &&
+            other is _ModelVoClassKey &&
+            const DeepCollectionEquality().equals(other.weekDay, weekDay) &&
+            const DeepCollectionEquality().equals(other.period, period));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(weekDay) ^
-      const DeepCollectionEquality().hash(period);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(weekDay),
+      const DeepCollectionEquality().hash(period));
 
   @JsonKey(ignore: true)
   @override
@@ -768,9 +761,9 @@ abstract class _ModelVoClassKey implements ModelVoClassKey {
       _$_ModelVoClassKey;
 
   @override
-  WeekDay get weekDay => throw _privateConstructorUsedError;
+  WeekDay get weekDay;
   @override
-  int get period => throw _privateConstructorUsedError;
+  int get period;
   @override
   @JsonKey(ignore: true)
   _$ModelVoClassKeyCopyWith<_ModelVoClassKey> get copyWith =>
@@ -905,18 +898,17 @@ class _$_ModelVoClassInfo
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _ModelVoClassInfo &&
-            (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.room, room) ||
-                const DeepCollectionEquality().equals(other.room, room)));
+        (other.runtimeType == runtimeType &&
+            other is _ModelVoClassInfo &&
+            const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality().equals(other.room, room));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(room);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(room));
 
   @JsonKey(ignore: true)
   @override
@@ -929,9 +921,9 @@ abstract class _ModelVoClassInfo implements ModelVoClassInfo {
       _$_ModelVoClassInfo;
 
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  String get room => throw _privateConstructorUsedError;
+  String get room;
   @override
   @JsonKey(ignore: true)
   _$ModelVoClassInfoCopyWith<_ModelVoClassInfo> get copyWith =>
@@ -1084,19 +1076,17 @@ class _$_ModelVoTermAndClasses
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _ModelVoTermAndClasses &&
-            (identical(other.termInfo, termInfo) ||
-                const DeepCollectionEquality()
-                    .equals(other.termInfo, termInfo)) &&
-            (identical(other.classes, classes) ||
-                const DeepCollectionEquality().equals(other.classes, classes)));
+        (other.runtimeType == runtimeType &&
+            other is _ModelVoTermAndClasses &&
+            const DeepCollectionEquality().equals(other.termInfo, termInfo) &&
+            const DeepCollectionEquality().equals(other.classes, classes));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(termInfo) ^
-      const DeepCollectionEquality().hash(classes);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(termInfo),
+      const DeepCollectionEquality().hash(classes));
 
   @JsonKey(ignore: true)
   @override
@@ -1111,10 +1101,9 @@ abstract class _ModelVoTermAndClasses implements ModelVoTermAndClasses {
       _$_ModelVoTermAndClasses;
 
   @override
-  ModelVoTermInfo get termInfo => throw _privateConstructorUsedError;
+  ModelVoTermInfo get termInfo;
   @override
-  Map<ModelVoClassKey, ModelVoClassInfo> get classes =>
-      throw _privateConstructorUsedError;
+  Map<ModelVoClassKey, ModelVoClassInfo> get classes;
   @override
   @JsonKey(ignore: true)
   _$ModelVoTermAndClassesCopyWith<_ModelVoTermAndClasses> get copyWith =>

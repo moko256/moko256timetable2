@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'model_view_main.dart';
@@ -234,28 +235,22 @@ class _$_CurrentClasses
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _CurrentClasses &&
-            (identical(other.classes, classes) ||
-                const DeepCollectionEquality()
-                    .equals(other.classes, classes)) &&
-            (identical(other.cellColors, cellColors) ||
-                const DeepCollectionEquality()
-                    .equals(other.cellColors, cellColors)) &&
-            (identical(other.termKey, termKey) ||
-                const DeepCollectionEquality()
-                    .equals(other.termKey, termKey)) &&
-            (identical(other.termInfo, termInfo) ||
-                const DeepCollectionEquality()
-                    .equals(other.termInfo, termInfo)));
+        (other.runtimeType == runtimeType &&
+            other is _CurrentClasses &&
+            const DeepCollectionEquality().equals(other.classes, classes) &&
+            const DeepCollectionEquality()
+                .equals(other.cellColors, cellColors) &&
+            const DeepCollectionEquality().equals(other.termKey, termKey) &&
+            const DeepCollectionEquality().equals(other.termInfo, termInfo));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(classes) ^
-      const DeepCollectionEquality().hash(cellColors) ^
-      const DeepCollectionEquality().hash(termKey) ^
-      const DeepCollectionEquality().hash(termInfo);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(classes),
+      const DeepCollectionEquality().hash(cellColors),
+      const DeepCollectionEquality().hash(termKey),
+      const DeepCollectionEquality().hash(termInfo));
 
   @JsonKey(ignore: true)
   @override
@@ -353,11 +348,10 @@ abstract class _CurrentClasses implements CurrentClassesVmState {
       ModelVoTermKey termKey,
       ModelVoTermInfo termInfo) = _$_CurrentClasses;
 
-  ModelVoClasses get classes => throw _privateConstructorUsedError;
-  Map<ModelVoClassInfo, double> get cellColors =>
-      throw _privateConstructorUsedError;
-  ModelVoTermKey get termKey => throw _privateConstructorUsedError;
-  ModelVoTermInfo get termInfo => throw _privateConstructorUsedError;
+  ModelVoClasses get classes;
+  Map<ModelVoClassInfo, double> get cellColors;
+  ModelVoTermKey get termKey;
+  ModelVoTermInfo get termInfo;
   @JsonKey(ignore: true)
   _$CurrentClassesCopyWith<_CurrentClasses> get copyWith =>
       throw _privateConstructorUsedError;
@@ -403,7 +397,8 @@ class _$_ClassesIsNotExist
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _ClassesIsNotExist);
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _ClassesIsNotExist);
   }
 
   @override
@@ -537,7 +532,8 @@ class _$_ClassesIsLoading
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _ClassesIsLoading);
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _ClassesIsLoading);
   }
 
   @override
@@ -769,14 +765,14 @@ class _$_Terms with DiagnosticableTreeMixin implements _Terms {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _Terms &&
-            (identical(other.terms, terms) ||
-                const DeepCollectionEquality().equals(other.terms, terms)));
+        (other.runtimeType == runtimeType &&
+            other is _Terms &&
+            const DeepCollectionEquality().equals(other.terms, terms));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(terms);
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(terms));
 
   @JsonKey(ignore: true)
   @override
@@ -849,7 +845,7 @@ class _$_Terms with DiagnosticableTreeMixin implements _Terms {
 abstract class _Terms implements TermsVmState {
   const factory _Terms(ModelVoTerms terms) = _$_Terms;
 
-  ModelVoTerms get terms => throw _privateConstructorUsedError;
+  ModelVoTerms get terms;
   @JsonKey(ignore: true)
   _$TermsCopyWith<_Terms> get copyWith => throw _privateConstructorUsedError;
 }
@@ -893,7 +889,8 @@ class _$_TermsIsLoading
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _TermsIsLoading);
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _TermsIsLoading);
   }
 
   @override
@@ -1118,19 +1115,18 @@ class _$_ModelViewMainState
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _ModelViewMainState &&
-            (identical(other.currentClasses, currentClasses) ||
-                const DeepCollectionEquality()
-                    .equals(other.currentClasses, currentClasses)) &&
-            (identical(other.terms, terms) ||
-                const DeepCollectionEquality().equals(other.terms, terms)));
+        (other.runtimeType == runtimeType &&
+            other is _ModelViewMainState &&
+            const DeepCollectionEquality()
+                .equals(other.currentClasses, currentClasses) &&
+            const DeepCollectionEquality().equals(other.terms, terms));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(currentClasses) ^
-      const DeepCollectionEquality().hash(terms);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(currentClasses),
+      const DeepCollectionEquality().hash(terms));
 
   @JsonKey(ignore: true)
   @override
@@ -1144,10 +1140,9 @@ abstract class _ModelViewMainState implements ModelViewMainState {
       _$_ModelViewMainState;
 
   @override
-  CurrentClassesVmState get currentClasses =>
-      throw _privateConstructorUsedError;
+  CurrentClassesVmState get currentClasses;
   @override
-  TermsVmState get terms => throw _privateConstructorUsedError;
+  TermsVmState get terms;
   @override
   @JsonKey(ignore: true)
   _$ModelViewMainStateCopyWith<_ModelViewMainState> get copyWith =>

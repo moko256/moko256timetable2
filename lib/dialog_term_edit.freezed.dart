@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'dialog_term_edit.dart';
@@ -157,23 +158,19 @@ class _$_DialogTermEditContent
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _DialogTermEditContent &&
-            (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.weekDays, weekDays) ||
-                const DeepCollectionEquality()
-                    .equals(other.weekDays, weekDays)) &&
-            (identical(other.periodMax, periodMax) ||
-                const DeepCollectionEquality()
-                    .equals(other.periodMax, periodMax)));
+        (other.runtimeType == runtimeType &&
+            other is _DialogTermEditContent &&
+            const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality().equals(other.weekDays, weekDays) &&
+            const DeepCollectionEquality().equals(other.periodMax, periodMax));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(weekDays) ^
-      const DeepCollectionEquality().hash(periodMax);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(weekDays),
+      const DeepCollectionEquality().hash(periodMax));
 
   @JsonKey(ignore: true)
   @override
@@ -188,11 +185,11 @@ abstract class _DialogTermEditContent implements DialogTermEditContent {
       _$_DialogTermEditContent;
 
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  List<WeekDay> get weekDays => throw _privateConstructorUsedError;
+  List<WeekDay> get weekDays;
   @override
-  int get periodMax => throw _privateConstructorUsedError;
+  int get periodMax;
   @override
   @JsonKey(ignore: true)
   _$DialogTermEditContentCopyWith<_DialogTermEditContent> get copyWith =>

@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'model_import_repo_impl.dart';
@@ -29,7 +30,7 @@ class _$_ImportingTimetableTearOff {
     );
   }
 
-  _ImportingTimetable fromJson(Map<String, Object> json) {
+  _ImportingTimetable fromJson(Map<String, Object?> json) {
     return _ImportingTimetable.fromJson(json);
   }
 }
@@ -155,18 +156,17 @@ class _$__ImportingTimetable implements __ImportingTimetable {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is __ImportingTimetable &&
-            (identical(other.info, info) ||
-                const DeepCollectionEquality().equals(other.info, info)) &&
-            (identical(other.classes, classes) ||
-                const DeepCollectionEquality().equals(other.classes, classes)));
+        (other.runtimeType == runtimeType &&
+            other is __ImportingTimetable &&
+            const DeepCollectionEquality().equals(other.info, info) &&
+            const DeepCollectionEquality().equals(other.classes, classes));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(info) ^
-      const DeepCollectionEquality().hash(classes);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(info),
+      const DeepCollectionEquality().hash(classes));
 
   @JsonKey(ignore: true)
   @override
@@ -189,9 +189,9 @@ abstract class __ImportingTimetable implements _ImportingTimetable {
       _$__ImportingTimetable.fromJson;
 
   @override
-  _ImportingClassesInfo get info => throw _privateConstructorUsedError;
+  _ImportingClassesInfo get info;
   @override
-  List<_ImportingClass> get classes => throw _privateConstructorUsedError;
+  List<_ImportingClass> get classes;
   @override
   @JsonKey(ignore: true)
   _$_ImportingTimetableCopyWith<__ImportingTimetable> get copyWith =>
@@ -216,7 +216,7 @@ class _$_ImportingClassesInfoTearOff {
     );
   }
 
-  _ImportingClassesInfo fromJson(Map<String, Object> json) {
+  _ImportingClassesInfo fromJson(Map<String, Object?> json) {
     return _ImportingClassesInfo.fromJson(json);
   }
 }
@@ -343,23 +343,19 @@ class _$__ImportingClassesInfo implements __ImportingClassesInfo {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is __ImportingClassesInfo &&
-            (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.periodMax, periodMax) ||
-                const DeepCollectionEquality()
-                    .equals(other.periodMax, periodMax)) &&
-            (identical(other.weekDays, weekDays) ||
-                const DeepCollectionEquality()
-                    .equals(other.weekDays, weekDays)));
+        (other.runtimeType == runtimeType &&
+            other is __ImportingClassesInfo &&
+            const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality().equals(other.periodMax, periodMax) &&
+            const DeepCollectionEquality().equals(other.weekDays, weekDays));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(periodMax) ^
-      const DeepCollectionEquality().hash(weekDays);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(periodMax),
+      const DeepCollectionEquality().hash(weekDays));
 
   @JsonKey(ignore: true)
   @override
@@ -382,11 +378,11 @@ abstract class __ImportingClassesInfo implements _ImportingClassesInfo {
       _$__ImportingClassesInfo.fromJson;
 
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  int get periodMax => throw _privateConstructorUsedError;
+  int get periodMax;
   @override
-  List<String> get weekDays => throw _privateConstructorUsedError;
+  List<String> get weekDays;
   @override
   @JsonKey(ignore: true)
   _$_ImportingClassesInfoCopyWith<__ImportingClassesInfo> get copyWith =>
@@ -410,7 +406,7 @@ class _$_ImportingClassTearOff {
     );
   }
 
-  _ImportingClass fromJson(Map<String, Object> json) {
+  _ImportingClass fromJson(Map<String, Object?> json) {
     return _ImportingClass.fromJson(json);
   }
 }
@@ -550,25 +546,21 @@ class _$__ImportingClass implements __ImportingClass {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is __ImportingClass &&
-            (identical(other.weekDay, weekDay) ||
-                const DeepCollectionEquality()
-                    .equals(other.weekDay, weekDay)) &&
-            (identical(other.period, period) ||
-                const DeepCollectionEquality().equals(other.period, period)) &&
-            (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.room, room) ||
-                const DeepCollectionEquality().equals(other.room, room)));
+        (other.runtimeType == runtimeType &&
+            other is __ImportingClass &&
+            const DeepCollectionEquality().equals(other.weekDay, weekDay) &&
+            const DeepCollectionEquality().equals(other.period, period) &&
+            const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality().equals(other.room, room));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(weekDay) ^
-      const DeepCollectionEquality().hash(period) ^
-      const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(room);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(weekDay),
+      const DeepCollectionEquality().hash(period),
+      const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(room));
 
   @JsonKey(ignore: true)
   @override
@@ -590,13 +582,13 @@ abstract class __ImportingClass implements _ImportingClass {
       _$__ImportingClass.fromJson;
 
   @override
-  String get weekDay => throw _privateConstructorUsedError;
+  String get weekDay;
   @override
-  int get period => throw _privateConstructorUsedError;
+  int get period;
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  String get room => throw _privateConstructorUsedError;
+  String get room;
   @override
   @JsonKey(ignore: true)
   _$_ImportingClassCopyWith<__ImportingClass> get copyWith =>

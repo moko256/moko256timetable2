@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'model_main.dart';
@@ -202,23 +203,21 @@ class _$_ModelState with DiagnosticableTreeMixin implements _ModelState {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _ModelState &&
-            (identical(other.currentTermKey, currentTermKey) ||
-                const DeepCollectionEquality()
-                    .equals(other.currentTermKey, currentTermKey)) &&
-            (identical(other.currentClasses, currentClasses) ||
-                const DeepCollectionEquality()
-                    .equals(other.currentClasses, currentClasses)) &&
-            (identical(other.terms, terms) ||
-                const DeepCollectionEquality().equals(other.terms, terms)));
+        (other.runtimeType == runtimeType &&
+            other is _ModelState &&
+            const DeepCollectionEquality()
+                .equals(other.currentTermKey, currentTermKey) &&
+            const DeepCollectionEquality()
+                .equals(other.currentClasses, currentClasses) &&
+            const DeepCollectionEquality().equals(other.terms, terms));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(currentTermKey) ^
-      const DeepCollectionEquality().hash(currentClasses) ^
-      const DeepCollectionEquality().hash(terms);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(currentTermKey),
+      const DeepCollectionEquality().hash(currentClasses),
+      const DeepCollectionEquality().hash(terms));
 
   @JsonKey(ignore: true)
   @override
@@ -231,11 +230,11 @@ abstract class _ModelState implements ModelState {
       ModelVoClasses? currentClasses, ModelVoTerms? terms) = _$_ModelState;
 
   @override
-  ModelVoTermKey? get currentTermKey => throw _privateConstructorUsedError;
+  ModelVoTermKey? get currentTermKey;
   @override
-  ModelVoClasses? get currentClasses => throw _privateConstructorUsedError;
+  ModelVoClasses? get currentClasses;
   @override
-  ModelVoTerms? get terms => throw _privateConstructorUsedError;
+  ModelVoTerms? get terms;
   @override
   @JsonKey(ignore: true)
   _$ModelStateCopyWith<_ModelState> get copyWith =>
