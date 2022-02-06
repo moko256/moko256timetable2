@@ -2,6 +2,7 @@
     "app_name": "Timetables",
 
     "action_cancel": "Cancel",
+    "action_create": "Create",
     "action_update": "Update",
     "action_delete": "Delete",
 

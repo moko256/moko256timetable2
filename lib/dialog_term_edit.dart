@@ -109,7 +109,9 @@ class DialogTermEdit extends ConsumerWidget {
           },
         ),
         ElevatedButton(
-          child: Text(AppLocale.of(context).action_update),
+          child: Text(forCreateNew
+              ? AppLocale.of(context).action_create
+              : AppLocale.of(context).action_update),
           onPressed: () {
             callback(model.state);
             Navigator.of(context).pop();

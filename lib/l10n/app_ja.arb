@@ -2,6 +2,7 @@
     "app_name": "時間割",
 
     "action_cancel": "キャンセル",
+    "action_create": "作成",
     "action_update": "更新",
     "action_delete": "削除",
 
