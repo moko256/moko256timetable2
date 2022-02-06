@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:moko256timetable2/model_main.dart';
-import 'package:moko256timetable2/model_main_repo_mock.dart';
+import 'package:moko256timetable2/model_main_repo_impl.dart';
 import 'package:moko256timetable2/model_main_vo.dart';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -36,7 +36,7 @@ class ModelViewMainState with _$ModelViewMainState {
 class ModelViewMain {
   static final _modelStateProvider =
       StateNotifierProvider<ModelMain, ModelState>(
-          (ref) => ModelMain(ModelMainRepoMock()));
+          (ref) => ModelMain(ModelMainRepoImpl()));
   static final _modelControllerProvider = _modelStateProvider.notifier;
 
   static var stateProvider = Provider((ref) {
