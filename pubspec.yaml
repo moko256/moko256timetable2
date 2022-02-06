@@ -27,8 +27,7 @@ dependencies:
     sdk: flutter
 
   rxdart: ^0.27.2
-  flutter_hooks: ^0.18.0
-  hooks_riverpod: ^1.0.0-dev.7
+  flutter_riverpod: ^2.0.0-dev.0
   freezed_annotation:
   json_serializable:
   color_models:

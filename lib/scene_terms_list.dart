@@ -1,36 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:moko256timetable2/app_locale.dart';
-import 'package:moko256timetable2/model_main.dart';
+import 'package:moko256timetable2/dialog_term_edit.dart';
+import 'package:moko256timetable2/model_import_repo.dart';
+import 'package:moko256timetable2/model_import_repo_impl.dart';
+import 'package:moko256timetable2/model_main_vo.dart';
 import 'package:moko256timetable2/model_view_main.dart';
-import 'package:moko256timetable2/routes_main.dart';
 
-class SceneTermsList extends HookConsumerWidget {
+class SceneTermsList extends ConsumerWidget {
   const SceneTermsList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ModelMain model = ref.watch(ModelViewMain.modelMain);
-    AsyncSnapshot<EntityMainTermsAndCurrent?> termsSnapshot =
-        useStream(model.terms);
+    var state = ref.watch(ModelViewMain.stateProvider);
+    var controller = ref.watch(ModelViewMain.controllerProvider);
 
-    ModelMainEditTerm modelEdit = ref.watch(ModelViewMain.modelMainEditTerm);
-
-    var terms = termsSnapshot.data;
-    List<MapEntry<EntityMainTermKey, EntityMainTermInfo>> termsList =
-        terms?.terms?.entries.toList() ?? [];
+    List<MapEntry<ModelVoTermKey, ModelVoTermInfo>> termsList = state.terms
+        .when((terms) => terms.terms.entries.toList(), loading: () => []);
+    var currentTermKey = state.currentClasses.when(
+      (classes, cellColors, termKey, termInfo) => termKey,
+      notExist: () => null,
+      loading: () => null,
+    );
 
     var importKind = [
       _ImportKind(
         Icons.description,
         AppLocale.of(context).add_term_from_storage,
-        model.startImportFromStorage,
+        ModelImportRepoJsonFromStorage(),
       ),
       _ImportKind(
         Icons.content_paste,
         AppLocale.of(context).add_term_from_clipboard,
-        model.startImportFromClipboard,
+        ModelImportRepoJsonFromClipboard(),
       ),
     ];
 
@@ -45,16 +47,33 @@ class SceneTermsList extends HookConsumerWidget {
             var term = termsList[index];
             return ListTile(
               title: Text(term.value.name),
-              selected: term.key == terms?.currentTerm,
+              selected: term.key == currentTermKey,
               onTap: () {
-                model.selectTerm(term.key);
+                controller.selectTerm(term.key);
                 Navigator.of(context).pop();
               },
               trailing: IconButton(
                 icon: const Icon(Icons.edit),
                 onPressed: () {
-                  modelEdit.startEditing(term.key);
-                  RoutesMain.push(context, RoutesMain.routeTablesEdit);
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) => DialogTermEdit(
+                      false,
+                      term.value.name,
+                      term.value.weekDays.toList(),
+                      term.value.maxPeriod,
+                      (arg) {
+                        controller.updateTerm(
+                          term.key,
+                          ModelVoTermInfo(
+                            arg.name,
+                            arg.weekDays,
+                            arg.periodMax,
+                          ),
+                        );
+                      },
+                    ),
+                  );
                 },
               ),
             );
@@ -65,8 +84,20 @@ class SceneTermsList extends HookConsumerWidget {
               leading: const Icon(Icons.add),
               title: Text(AppLocale.of(context).add_term_new),
               onTap: () {
-                modelEdit.startEditing(null);
-                RoutesMain.push(context, RoutesMain.routeTablesEdit);
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) => DialogTermEdit(
+                    true,
+                    "",
+                    const [],
+                    0,
+                    (arg) {
+                      controller.addTerm(
+                        ModelVoTermInfo(arg.name, arg.weekDays, arg.periodMax),
+                      );
+                    },
+                  ),
+                );
               },
             );
           } else {
@@ -75,7 +106,7 @@ class SceneTermsList extends HookConsumerWidget {
               leading: Icon(kind.icon),
               title: Text(kind.title),
               onTap: () async {
-                var success = await kind.import();
+                var success = await controller.import(kind.import);
                 if (success) {
                   Navigator.of(context).pop();
                 } else {
@@ -97,7 +128,7 @@ class SceneTermsList extends HookConsumerWidget {
 class _ImportKind {
   IconData icon;
   String title;
-  Future<bool> Function() import;
+  ModelImportRepo import;
 
   _ImportKind(this.icon, this.title, this.import);
 }

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'repo_import.dart';
+part of 'model_import_repo_impl.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

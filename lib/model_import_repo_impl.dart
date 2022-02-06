@@ -3,58 +3,70 @@ import 'dart:convert';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/services.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:moko256timetable2/model_main.dart';
+import 'package:moko256timetable2/model_main_vo.dart';
+import 'package:moko256timetable2/weekdays.dart';
 
-part 'repo_import.freezed.dart';
-part 'repo_import.g.dart';
+import 'model_import_repo.dart';
+part 'model_import_repo_impl.freezed.dart';
+part 'model_import_repo_impl.g.dart';
 
-class RepoMainImport {
-  Future<EntityMainClassesImport?> importJsonFromStorage() async {
+class ModelImportRepoJsonFromStorage extends ModelImportRepoJson {
+  @override
+  Future<String?> jsonSource() async {
     var fileResult = await FilePicker.platform.pickFiles(withReadStream: true);
 
     var stream = await fileResult?.files.singleOrNull?.readStream?.first;
     if (stream != null) {
-      return _classesFromJson(const Utf8Decoder().convert(stream));
-    } else {
-      return null;
-    }
-  }
-
-  Future<EntityMainClassesImport?> importJsonFromClipboard() async {
-    var clipResult = await Clipboard.getData(Clipboard.kTextPlain);
-    var text = clipResult?.text;
-    if (text != null) {
-      return _classesFromJson(text);
+      return const Utf8Decoder().convert(stream);
     } else {
       return null;
     }
   }
 }
 
-EntityMainClassesImport? _classesFromJson(String value) {
+class ModelImportRepoJsonFromClipboard extends ModelImportRepoJson {
+  @override
+  Future<String?> jsonSource() async {
+    var clipResult = await Clipboard.getData(Clipboard.kTextPlain);
+    return clipResult?.text;
+  }
+}
+
+abstract class ModelImportRepoJson extends ModelImportRepo {
+  Future<String?> jsonSource();
+
+  @override
+  Future<ModelVoTermAndClasses?> import() async {
+    var json = await jsonSource();
+    if (json != null) {
+      return _classesFromJson(json);
+    } else {
+      return null;
+    }
+  }
+}
+
+ModelVoTermAndClasses? _classesFromJson(String value) {
   try {
     var jsonTimetable = _ImportingTimetable.fromJson(json.decode(value));
 
-    return EntityMainClassesImport(
-      EntityMainTermInfo(
+    return ModelVoTermAndClasses(
+      ModelVoTermInfo(
         jsonTimetable.info.name,
-        {
-          for (int i = 0; i < jsonTimetable.info.periodMax; i++)
-            Duration(hours: i)
-        },
-        jsonTimetable.info.weekDays.map(_weekdayFromString).toSet(),
+        jsonTimetable.info.weekDays.map(_weekdayFromString).toList(),
+        jsonTimetable.info.periodMax,
       ),
-      EntityMainClassesMap({
+      {
         for (var item in jsonTimetable.classes
             .where((item) => item.room != "" || item.name != ""))
-          EntityMainClassWhere(
+          ModelVoClassKey(
             _weekdayFromString(item.weekDay),
-            Duration(hours: item.period),
-          ): EntityMainClassInfo(
+            item.period,
+          ): ModelVoClassInfo(
             item.name,
             item.room,
           )
-      }),
+      },
     );
   } catch (e) {
     return null;
