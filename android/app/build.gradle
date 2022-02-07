@@ -51,6 +51,8 @@ android {
     }
 
     packagingOptions {
+        exclude '/DebugProbesKt.bin'
+        exclude '/kotlin-tooling-metadata.json'
         exclude '/kotlin/**'
         exclude '/META-INF/*.version'
         exclude '/META-INF/*.kotlin_module'
