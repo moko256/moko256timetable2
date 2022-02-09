@@ -1,7 +1,5 @@
-import 'dart:math';
-
-import 'package:color_models/color_models.dart';
 import 'package:flutter/material.dart';
+import 'package:material_color_utilities/hct/hct.dart';
 
 @immutable
 class ComponentClass {
@@ -29,13 +27,13 @@ class _ComponentClassWithDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     double l;
     double c;
-    var h = pi * colorPosition;
+    var h = 10 + 250 * colorPosition;
     if (Theme.of(context).brightness == Brightness.light) {
-      l = 93.0;
-      c = 46.0;
+      l = 88.0;
+      c = 50.0;
     } else {
       l = 70.0;
-      c = 38.0;
+      c = 40.0;
     }
 
     var textStyle =
@@ -76,7 +74,7 @@ class _ComponentClassEmpty extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color background = (Theme.of(context).brightness == Brightness.light)
-        ? _lchToRgb(90, 0, 0)
+        ? _lchToRgb(86, 0, 0)
         : _lchToRgb(30, 0, 0);
     return Card(
       elevation: 0,
@@ -88,6 +86,6 @@ class _ComponentClassEmpty extends StatelessWidget {
 }
 
 Color _lchToRgb(double l, double c, double h) {
-  var color = LabColor(l, c * cos(h), c * sin(h)).toRgbColor();
-  return Color.fromARGB(color.alpha, color.red, color.green, color.blue);
+  var color = HctColor.from(h, c, l).toInt();
+  return Color(color);
 }
