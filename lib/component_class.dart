@@ -32,7 +32,7 @@ class _ComponentClassWithDetail extends StatelessWidget {
       l = 88.0;
       c = 50.0;
     } else {
-      l = 70.0;
+      l = 72.0;
       c = 40.0;
     }
 
@@ -75,7 +75,7 @@ class _ComponentClassEmpty extends StatelessWidget {
   Widget build(BuildContext context) {
     Color background = (Theme.of(context).brightness == Brightness.light)
         ? _lchToRgb(86, 0, 0)
-        : _lchToRgb(30, 0, 0);
+        : _lchToRgb(20, 0, 0);
     return Card(
       elevation: 0,
       color: background,

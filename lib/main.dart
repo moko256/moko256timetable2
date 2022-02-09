@@ -10,15 +10,14 @@ void main() async {
 class MainApp extends StatelessWidget {
   const MainApp({Key? key}) : super(key: key);
 
-  ThemeData createTheme(Brightness mode, Color foreground) {
-    var theme = ThemeData(
-      primarySwatch: Colors.blueGrey,
-      brightness: mode,
-    );
+  ThemeData createTheme(Brightness mode) {
+    var theme = ThemeData.from(
+        colorScheme:
+            ColorScheme.fromSeed(seedColor: Colors.blueGrey, brightness: mode));
     theme = theme.copyWith(
       appBarTheme: AppBarTheme(
         backgroundColor: theme.scaffoldBackgroundColor,
-        foregroundColor: foreground,
+        foregroundColor: theme.colorScheme.onBackground,
         elevation: 0,
       ),
     );
@@ -29,8 +28,8 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ProviderScope(
       child: MaterialApp(
-        theme: createTheme(Brightness.light, Colors.black),
-        darkTheme: createTheme(Brightness.dark, Colors.white),
+        theme: createTheme(Brightness.light),
+        darkTheme: createTheme(Brightness.dark),
         initialRoute: RoutesMain.routeRoot,
         routes: RoutesMain.routes,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
