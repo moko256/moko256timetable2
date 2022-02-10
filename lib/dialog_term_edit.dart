@@ -82,6 +82,7 @@ class DialogTermEdit extends ConsumerWidget {
                   FilterChip(
                     label: Text(weekDayNames[weekDay.index]),
                     showCheckmark: false,
+                    selectedColor: Theme.of(context).colorScheme.inversePrimary,
                     selected: weekDays.contains(weekDay),
                     onSelected: (bool selected) {
                       if (selected) {

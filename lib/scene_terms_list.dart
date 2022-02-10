@@ -48,7 +48,7 @@ class SceneTermsList extends ConsumerWidget {
             return ListTile(
               title: Text(term.value.name),
               selected: term.key == currentTermKey,
-              selectedTileColor: Theme.of(context).colorScheme.surface,
+              selectedTileColor: Theme.of(context).colorScheme.surfaceVariant,
               onTap: () {
                 controller.selectTerm(term.key);
                 Navigator.of(context).pop();
