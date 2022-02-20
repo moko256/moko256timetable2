@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:hive/hive.dart';
+import 'package:moko256timetable2/hive_initializer.dart';
 import 'package:moko256timetable2/model_main_vo.dart';
 import 'package:moko256timetable2/weekdays.dart';
 import 'package:path_provider/path_provider.dart';
@@ -14,7 +15,7 @@ class ModelMainRepoImpl extends ModelMainRepo {
   var initializeFuture = initialize();
 
   static Future<void> initialize() async {
-    Hive.init((await getApplicationSupportDirectory()).path);
+    await hiveInitialize();
     Hive.registerAdapter(HiveTermInfoAdapter());
     Hive.registerAdapter(HiveClassInfoAdapter());
   }
