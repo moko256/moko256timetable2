@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:moko256timetable2/app_locale.dart';
@@ -20,6 +21,8 @@ class MainApp extends StatelessWidget {
         foregroundColor: theme.colorScheme.onBackground,
         elevation: 0,
       ),
+      useMaterial3: true,
+      typography: Typography.material2021(platform: defaultTargetPlatform),
     );
     return theme;
   }
