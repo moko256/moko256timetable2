@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:moko256timetable2/model_main.dart';
 import 'package:moko256timetable2/model_main_repo_impl.dart';

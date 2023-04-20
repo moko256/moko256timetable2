@@ -86,6 +86,6 @@ class _ComponentClassEmpty extends StatelessWidget {
 }
 
 Color _lchToRgb(double l, double c, double h) {
-  var color = HctColor.from(h, c, l).toInt();
+  var color = Hct.from(h, c, l).toInt();
   return Color(color);
 }
