@@ -74,7 +74,7 @@ class _ComponentClassEmpty extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color background = (Theme.of(context).brightness == Brightness.light)
-        ? _lchToRgb(86, 0, 0)
+        ? _lchToRgb(90, 0, 0)
         : _lchToRgb(20, 0, 0);
     return Card(
       elevation: 0,
