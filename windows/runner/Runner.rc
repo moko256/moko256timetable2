@@ -93,7 +93,7 @@ BEGIN
             VALUE "FileDescription", "moko256timetable2" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "moko256timetable2" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2022 com.github.moko256. All rights reserved." "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2023 com.github.moko256. All rights reserved." "\0"
             VALUE "OriginalFilename", "moko256timetable2.exe" "\0"
             VALUE "ProductName", "moko256timetable2" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
