@@ -37,26 +37,34 @@ class _ComponentClassWithDetail extends StatelessWidget {
     }
 
     var textStyle =
-        Theme.of(context).textTheme.caption?.copyWith(color: Colors.black);
+        Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.black);
+
+    var color = _lchToRgb(l, c, h);
 
     return Card(
-      color: _lchToRgb(l, c, h),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),
       margin: const EdgeInsets.all(2.0),
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              name,
-              style: textStyle,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
+            Container(
+              padding: const EdgeInsets.all(2.0),
+              decoration: ShapeDecoration(
+                  color: color,
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(4.0)))),
+              child: Text(
+                name,
+                style: textStyle,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
             const SizedBox(height: 4),
             Text(
               room,
-              style: textStyle,
+              style: Theme.of(context).textTheme.bodySmall,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
@@ -74,7 +82,7 @@ class _ComponentClassEmpty extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color background = (Theme.of(context).brightness == Brightness.light)
-        ? _lchToRgb(86, 0, 0)
+        ? _lchToRgb(90, 0, 0)
         : _lchToRgb(20, 0, 0);
     return Card(
       elevation: 0,
@@ -86,6 +94,6 @@ class _ComponentClassEmpty extends StatelessWidget {
 }
 
 Color _lchToRgb(double l, double c, double h) {
-  var color = HctColor.from(h, c, l).toInt();
+  var color = Hct.from(h, c, l).toInt();
   return Color(color);
 }
